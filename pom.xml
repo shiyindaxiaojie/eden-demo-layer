@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.ylzl</groupId>
+		<artifactId>eden-parent</artifactId>
+		<version>2.4.13-SNAPSHOT</version>
+		<relativePath/>
+	</parent>
+	<groupId>org.ylzl.eden.demo</groupId>
+	<artifactId>eden-demo-layer</artifactId>
+	<packaging>pom</packaging>
+	<name>eden-demo-layer</name>
+	<version>1.0.0-SNAPSHOT</version>
+	<description>分层应用架构</description>
+
+	<modules>
+		<module>eden-demo-layer-api</module>
+		<module>eden-demo-layer-dao</module>
+		<module>eden-demo-layer-manager</module>
+		<module>eden-demo-layer-service</module>
+		<module>eden-demo-layer-web</module>
+		<module>eden-demo-layer-start</module>
+	</modules>
+
+	<developers>
+		<developer>
+			<id>demo</id>
+			<name>作者</name>
+			<email>demo@ylzl.org</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<properties>
+		<spring.profiles.active>prod</spring.profiles.active>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.ylzl.eden.demo</groupId>
+				<artifactId>eden-demo-layer-api</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.ylzl.eden.demo</groupId>
+				<artifactId>eden-demo-layer-common</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.ylzl.eden.demo</groupId>
+				<artifactId>eden-demo-layer-dao</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.ylzl.eden.demo</groupId>
+				<artifactId>eden-demo-layer-manager</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.ylzl.eden.demo</groupId>
+				<artifactId>eden-demo-layer-service</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.ylzl.eden.demo</groupId>
+				<artifactId>eden-demo-layer-web</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-archetype-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

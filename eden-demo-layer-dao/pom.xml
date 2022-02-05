@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.ylzl.eden.demo</groupId>
+		<artifactId>eden-demo-layer</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>eden-demo-layer-dao</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>eden-demo-layer-dao</name>
+	<description>数据持久层</description>
+
+	<dependencies>
+		<!-- API组件 -->
+		<dependency>
+			<groupId>org.ylzl.eden.demo</groupId>
+			<artifactId>eden-demo-layer-api</artifactId>
+		</dependency>
+
+		<!-- 开发组件 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-spring-framework</artifactId>
+		</dependency>
+
+		<!-- 测试组件 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- 持久化组件 -->
+		<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-spring-data</artifactId>
+		</dependency>
+		<!-- HikariCP -->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency>
+		<!-- MySQL -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- H2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- Mybatis -->
+		<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-mybatis-spring-boot-starter</artifactId>
+		</dependency>
+		<!-- Liquibase -->
+		<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-liquibase-spring-boot-starter</artifactId>
+		</dependency>
+		<!-- Dynamic Datasource -->
+		<!--<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-dynamic-datasource-spring-boot-starter</artifactId>
+		</dependency>-->
+		<!-- Sharding JDBC -->
+		<!--<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-sharding-jdbc-spring-boot-starter</artifactId>
+		</dependency>-->
+	</dependencies>
+</project>

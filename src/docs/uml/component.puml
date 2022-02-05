@@ -1,0 +1,36 @@
+@startuml
+[eden-demo-layer-start（启动入口）] --> [eden-demo-layer-web（请求处理层）]
+[eden-demo-layer-web（请求处理层）] --> [eden-demo-layer-api（API层）]
+[eden-demo-layer-web（请求处理层）] --> [eden-demo-layer-service（业务逻辑服务层）]
+[eden-demo-layer-service（业务逻辑服务层）] --> [eden-demo-layer-api（API层）]: 实现接口
+[eden-demo-layer-service（业务逻辑服务层）] --> [eden-demo-layer-dao（数据持久层）]
+[eden-demo-layer-service（业务逻辑服务层）] --> [eden-demo-layer-manager（通用业务处理层）]
+[eden-demo-layer-manager（通用业务处理层）] --> [eden-demo-layer-dao（数据持久层）]
+[eden-demo-layer-dao（数据持久层）] --> [eden-demo-layer-api（API层）]
+
+cloud APP
+cloud 其他应用服务
+cloud 第三方接口
+cloud 分布式调度平台
+
+database MySQL
+database Redis
+database MQ
+database Elasticsearch
+database MongoDB
+
+[APP] --> http: 前端请求
+[其他应用服务] --> rpc: 服务调用
+[eden-demo-layer-service（业务逻辑服务层）] - rpc: 暴露 Dubbo 接口
+http - [eden-demo-layer-web（请求处理层）]: 暴露 REST 接口
+
+[eden-demo-layer-dao（数据持久层）] ..> MySQL : 数据持久化
+[eden-demo-layer-dao（数据持久层）] ..> Elasticsearch : 数据持久化
+[eden-demo-layer-dao（数据持久层）] ..> MongoDB : 数据持久化
+
+[eden-demo-layer-manager（通用业务处理层）] ..> Redis : 缓存处理
+[eden-demo-layer-manager（通用业务处理层）] ..> MQ : 消息处理
+[eden-demo-layer-manager（通用业务处理层）] ..> 第三方接口 : 封装调用
+[eden-demo-layer-manager（通用业务处理层）] ..> 分布式调度平台 : 定时任务
+
+@enduml

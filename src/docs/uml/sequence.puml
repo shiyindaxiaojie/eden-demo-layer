@@ -1,0 +1,15 @@
+@startuml
+
+autonumber
+
+"外部请求（WEB）" -> "eden-demo-layer-web": 发送请求报文
+"eden-demo-layer-web" -> "eden-demo-layer-service": 调用业务逻辑层
+"eden-demo-layer-service" -> "eden-demo-layer-dao": 调用数据访问层
+"eden-demo-layer-service" -> "eden-demo-layer-manager": 调用通用业务处理层（可选）
+"eden-demo-layer-manager" -> "eden-demo-layer-dao": 对多个 DAO 的组合复用
+"eden-demo-layer-manager" -> "中间件（Redis/MQ/XXLJob）": 管理和调用第三方中间件，例如缓存，消息队列，任务调度
+"eden-demo-layer-dao" -> "存储组件（DB/ES）": 执行数据库读写操作
+"eden-demo-layer-dao" --> "eden-demo-layer-service": 返回数据库执行结果
+"eden-demo-layer-service" --> "eden-demo-layer-web": 组装数据响应报文
+
+@enduml
