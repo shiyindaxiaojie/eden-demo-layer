@@ -7,7 +7,7 @@ import org.ylzl.eden.demo.dao.repository.mybatis.dataobject.UserDO;
 /**
  * 用户（数据对象）存储访问接口
  *
- * @author gyl
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.x
  */
 public interface UserDAO {

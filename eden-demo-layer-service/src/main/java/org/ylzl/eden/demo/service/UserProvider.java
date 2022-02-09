@@ -9,7 +9,7 @@ import org.ylzl.eden.demo.service.impl.UserServiceImpl;
 /**
  * 用户业务 RPC服务端
  *
- * @author gyl
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.x
  */
 @DubboService(timeout = DubboConstant.DEFAULT_TIMEOUT)

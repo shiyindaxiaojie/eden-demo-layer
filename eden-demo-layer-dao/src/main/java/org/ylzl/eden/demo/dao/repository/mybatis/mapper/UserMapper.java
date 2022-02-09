@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 用户信息表数据库映射
  *
- * @author gyl
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.x
  */
 @Mapper

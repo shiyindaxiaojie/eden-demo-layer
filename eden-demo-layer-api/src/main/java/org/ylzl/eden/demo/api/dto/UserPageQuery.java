@@ -6,7 +6,7 @@ import lombok.*;
 /**
  * 用户分页查询（数据传输对象）
  *
- * @author gyl
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.x
  */
 @NoArgsConstructor // 扩展的时候需要重新定义无参构造
