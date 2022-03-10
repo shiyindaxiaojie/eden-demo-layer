@@ -2,6 +2,7 @@ package org.ylzl.eden.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.ylzl.eden.demo.api.UserService;
@@ -27,6 +28,7 @@ import java.util.List;
  * @since 2.4.x
  */
 @CatchLog
+@RequiredArgsConstructor
 @Slf4j
 @Service("userService")
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements UserService {
@@ -34,11 +36,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	private final UserDAO userDAO;
 
 	private final UserConvertor userConvertor;
-
-	public UserServiceImpl(UserDAO userDAO, UserConvertor userConvertor) {
-		this.userDAO = userDAO;
-		this.userConvertor = userConvertor;
-	}
 
 	/**
 	 * 创建用户
