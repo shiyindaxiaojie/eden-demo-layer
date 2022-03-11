@@ -207,13 +207,13 @@
 		<!-- 配置中心 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-nacos-config-spring-boot-starter</artifactId>
+			<artifactId>eden-nacos-config-spring-cloud-starter</artifactId>
 		</dependency>
 
 		<!-- 注册中心 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-nacos-discovery-spring-boot-starter</artifactId>
+			<artifactId>eden-nacos-discovery-spring-cloud-starter</artifactId>
 		</dependency>
 
 		<!-- 分布式组件 -->
