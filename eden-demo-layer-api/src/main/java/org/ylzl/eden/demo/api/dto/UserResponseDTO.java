@@ -14,7 +14,7 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 @Data
-public class UserVO {
+public class UserResponseDTO {
 
 	private Long id;
 

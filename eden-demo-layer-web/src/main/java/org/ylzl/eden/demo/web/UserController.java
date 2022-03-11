@@ -1,12 +1,13 @@
 package org.ylzl.eden.demo.web;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.ylzl.eden.demo.api.UserService;
-import org.ylzl.eden.demo.api.dto.UserDTO;
+import org.ylzl.eden.demo.api.dto.UserRequestDTO;
 import org.ylzl.eden.demo.api.dto.UserPageQuery;
-import org.ylzl.eden.demo.api.dto.UserVO;
+import org.ylzl.eden.demo.api.dto.UserResponseDTO;
 import org.ylzl.eden.demo.web.constant.ApiConstant;
 import org.ylzl.eden.spring.framework.cola.dto.PageResponse;
 import org.ylzl.eden.spring.framework.cola.dto.Response;
@@ -20,16 +21,13 @@ import javax.validation.Valid;
  * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.x
  */
+@RequiredArgsConstructor
 @Slf4j
 @RequestMapping(ApiConstant.WEB_API_PATH + "/users")
 @RestController
 public class UserController {
 
 	private final UserService userService;
-
-	public UserController(@Qualifier("userService") UserService userService) {
-		this.userService = userService;
-	}
 
 	/**
 	 * 创建用户
@@ -38,7 +36,7 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping
-	public Response createUser(@Valid @RequestBody UserDTO dto) {
+	public Response createUser(@Valid @RequestBody UserRequestDTO dto) {
 		return userService.createUser(dto);
 	}
 
@@ -50,7 +48,7 @@ public class UserController {
 	 * @return
 	 */
 	@PutMapping("/{id}")
-	public Response modifyUser(@PathVariable Long id, @Valid @RequestBody UserDTO dto) {
+	public Response modifyUser(@PathVariable Long id, @Valid @RequestBody UserRequestDTO dto) {
 		return userService.modifyUser(id, dto);
 	}
 
@@ -72,7 +70,7 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public SingleResponse<UserVO> getUserById(@PathVariable Long id) {
+	public SingleResponse<UserResponseDTO> getUserById(@PathVariable Long id) {
 		return userService.getUserById(id);
 	}
 
@@ -83,7 +81,7 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping
-	public PageResponse<UserVO> listUserByPage(@Valid @ModelAttribute UserPageQuery query) {
+	public PageResponse<UserResponseDTO> listUserByPage(@Valid @ModelAttribute UserPageQuery query) {
 		return userService.listUserByPage(query);
 	}
 }

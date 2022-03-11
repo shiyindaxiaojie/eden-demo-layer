@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode
 @ToString
 @Data
-public class UserDTO {
+public class UserRequestDTO {
 
 	@NotBlank(message = "用户不能为空")
 	private String login;
