@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.ylzl.eden.demo.api.UserService;
-import org.ylzl.eden.demo.api.dto.UserRequestDTO;
 import org.ylzl.eden.demo.api.dto.UserPageQuery;
+import org.ylzl.eden.demo.api.dto.UserRequestDTO;
 import org.ylzl.eden.demo.api.dto.UserResponseDTO;
 import org.ylzl.eden.demo.dao.UserDAO;
 import org.ylzl.eden.demo.dao.repository.mybatis.dataobject.UserDO;
@@ -17,7 +17,7 @@ import org.ylzl.eden.spring.framework.cola.catchlog.annotation.CatchLog;
 import org.ylzl.eden.spring.framework.cola.dto.PageResponse;
 import org.ylzl.eden.spring.framework.cola.dto.Response;
 import org.ylzl.eden.spring.framework.cola.dto.SingleResponse;
-import org.ylzl.eden.spring.framework.cola.exception.ClientErrorType;
+import org.ylzl.eden.spring.framework.error.ClientErrorType;
 
 import java.util.List;
 
@@ -59,7 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	@Override
 	public Response modifyUser(Long id, UserRequestDTO dto) {
 		UserDO userDO = userDAO.findById(id);
-		ClientErrorType.A0201.notNull(userDO);
+		ClientErrorType.notNull(userDO, "A0201");
 
 		userConvertor.updateDataObjectFromDTO(dto, userDO);
 		userDAO.updateById(userDO);
@@ -73,7 +73,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	 */
 	@Override
 	public Response removeUser(Long id) {
-		ClientErrorType.A0201.isTrue(userDAO.deleteById(id));
+		ClientErrorType.isTrue(userDAO.deleteById(id), "A0201");
 		return Response.buildSuccess();
 	}
 
@@ -86,7 +86,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	@Override
 	public SingleResponse<UserResponseDTO> getUserById(Long id) {
 		UserDO userDO = userDAO.findById(id);
-		ClientErrorType.A0201.notNull(userDO);
+		ClientErrorType.notNull(userDO, "A0201");
 		return SingleResponse.of(userConvertor.dataObjectToVO(userDO));
 	}
 
