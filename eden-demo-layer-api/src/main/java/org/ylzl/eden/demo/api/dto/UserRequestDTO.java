@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * 用户创建（数据传输对象）
  *
- * @author gyl
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.x
  */
 @Builder
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode
 @ToString
 @Data
-public class UserDTO {
+public class UserRequestDTO {
 
 	@NotBlank(message = "用户不能为空")
 	private String login;

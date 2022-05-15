@@ -5,7 +5,7 @@ import lombok.*;
 /**
  * 用户已创建（值对象）
  *
- * @author gyl
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.x
  */
 @Builder
@@ -14,7 +14,7 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 @Data
-public class UserVO {
+public class UserResponseDTO {
 
 	private Long id;
 

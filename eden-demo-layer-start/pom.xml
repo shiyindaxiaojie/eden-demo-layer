@@ -11,7 +11,7 @@
 	<artifactId>eden-demo-layer-start</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>eden-demo-layer-start</name>
+	<name>eden-demo-layer</name>
 	<description>应用启动入口</description>
 
 	<properties>
@@ -19,7 +19,7 @@
 	</properties>
 
 	<build>
-		<finalName>${project.artifactId}-${project.version}</finalName>
+		<finalName>${project.name}-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -207,13 +207,13 @@
 		<!-- 配置中心 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-nacos-config-spring-boot-starter</artifactId>
+			<artifactId>eden-nacos-config-spring-cloud-starter</artifactId>
 		</dependency>
 
 		<!-- 注册中心 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-nacos-discovery-spring-boot-starter</artifactId>
+			<artifactId>eden-nacos-discovery-spring-cloud-starter</artifactId>
 		</dependency>
 
 		<!-- 分布式组件 -->

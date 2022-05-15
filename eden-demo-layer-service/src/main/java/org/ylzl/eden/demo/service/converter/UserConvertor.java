@@ -1,7 +1,7 @@
 package org.ylzl.eden.demo.service.converter;
 
-import org.ylzl.eden.demo.api.dto.UserDTO;
-import org.ylzl.eden.demo.api.dto.UserVO;
+import org.ylzl.eden.demo.api.dto.UserRequestDTO;
+import org.ylzl.eden.demo.api.dto.UserResponseDTO;
 import org.ylzl.eden.demo.dao.repository.mybatis.dataobject.UserDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 用户转换器
  *
- * @author gyl
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.x
  */
 @Mapper(componentModel = "spring",
@@ -22,13 +22,11 @@ import java.util.List;
 	nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface UserConvertor {
 
-	UserConvertor INSTANCE = Mappers.getMapper(UserConvertor.class);
+	UserDO dtoToDataObject(UserRequestDTO dto);
 
-	UserDO dtoToDataObject(UserDTO dto);
+	void updateDataObjectFromDTO(UserRequestDTO dto, @MappingTarget UserDO dataObject);
 
-	void updateDataObjectFromDTO(UserDTO dto, @MappingTarget UserDO dataObject);
+	UserResponseDTO dataObjectToVO(UserDO dataObject);
 
-	UserVO dataObjectToVO(UserDO dataObject);
-
-	List<UserVO> dataObjectListToVOList(List<UserDO> dataObjectList);
+	List<UserResponseDTO> dataObjectListToVOList(List<UserDO> dataObjectList);
 }

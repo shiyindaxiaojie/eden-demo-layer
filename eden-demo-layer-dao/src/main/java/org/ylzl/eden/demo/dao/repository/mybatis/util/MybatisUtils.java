@@ -4,14 +4,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 import org.ylzl.eden.commons.lang.StringConstants;
-import org.ylzl.eden.template.mybatis.SortRuleEnum;
+import org.ylzl.eden.spring.data.mybatis.util.SortRuleEnum;
 
 import java.util.Arrays;
 
 /**
  * Mybatis 工具集
  *
- * @author gyl
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.x
  */
 @UtilityClass

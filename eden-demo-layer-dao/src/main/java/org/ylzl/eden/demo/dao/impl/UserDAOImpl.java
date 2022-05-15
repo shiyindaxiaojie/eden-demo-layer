@@ -2,6 +2,7 @@ package org.ylzl.eden.demo.dao.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import lombok.RequiredArgsConstructor;
 import org.ylzl.eden.demo.api.dto.UserPageQuery;
 import org.ylzl.eden.demo.dao.UserDAO;
 import org.ylzl.eden.demo.dao.repository.mybatis.dataobject.UserDO;
@@ -11,17 +12,14 @@ import org.springframework.stereotype.Repository;
 /**
  * 用户（数据对象）存储访问实现
  *
- * @author gyl
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.x
  */
+@RequiredArgsConstructor
 @Repository
 public class UserDAOImpl implements UserDAO {
 
 	private final UserMapper userMapper;
-
-	public UserDAOImpl(UserMapper userMapper) {
-		this.userMapper = userMapper;
-	}
 
 	/**
 	 * 创建用户
