@@ -14,6 +14,17 @@
 	<name>eden-demo-layer-dao</name>
 	<description>数据持久层</description>
 
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
 		<!-- API组件 -->
 		<dependency>
