@@ -13,7 +13,7 @@ import org.ylzl.eden.demo.dao.UserDAO;
 import org.ylzl.eden.demo.dao.repository.mybatis.dataobject.UserDO;
 import org.ylzl.eden.demo.dao.repository.mybatis.mapper.UserMapper;
 import org.ylzl.eden.demo.service.converter.UserConvertor;
-import org.ylzl.eden.spring.framework.cola.catchlog.annotation.CatchLog;
+import org.ylzl.eden.spring.framework.cola.catchlog.autoconfigure.CatchLog;
 import org.ylzl.eden.spring.framework.cola.dto.PageResponse;
 import org.ylzl.eden.spring.framework.cola.dto.Response;
 import org.ylzl.eden.spring.framework.cola.dto.SingleResponse;

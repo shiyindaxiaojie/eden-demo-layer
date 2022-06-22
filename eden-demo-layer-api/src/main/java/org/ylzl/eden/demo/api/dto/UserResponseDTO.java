@@ -2,6 +2,8 @@ package org.ylzl.eden.demo.api.dto;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 /**
  * 用户已创建（值对象）
  *
@@ -14,7 +16,7 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 @Data
-public class UserResponseDTO {
+public class UserResponseDTO implements Serializable {
 
 	private Long id;
 

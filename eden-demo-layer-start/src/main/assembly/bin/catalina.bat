@@ -1,12 +1,10 @@
 @echo off
 
-set APP_NAME=eden-demo-layer-start
-set APP_DIR=..\modules
-set APP_PATTERN=%APP_DIR%\%APP_NAME%*.jar
+set APP_DIR=..\target
+set APP_PATTERN=%APP_DIR%\*.jar
 for /f "delims=\" %%a in ('dir /b /a-d /o-d %APP_PATTERN%') do (
-     set APP_RUNNING_BIN=%APP_DIR%\%%a
+     set APP_NAME=%APP_DIR%\%%a
 )
-
 
 if "%1" == "start" (
      if exist "%JAVA_HOME%" (
@@ -15,7 +13,7 @@ if "%1" == "start" (
           java -version
      )
      echo start %APP_NAME%
-     start "%APP_NAME%" java -server -Xms512m -Xmx512m -Dfile.encoding=UTF-8 -jar %APP_RUNNING_BIN% --spring.config.additional-location=../config/ --logging.file.path=../logs/
+     start "%APP_NAME%" java -server -Xms512m -Xmx512m -Dfile.encoding=UTF-8 -jar %APP_NAME% --spring.config.additional-location=../conf/ --logging.file.path=../logs/
 ) else if "%1" == "stop" (
      echo stop %APP_NAME%
      taskkill /fi "WINDOWTITLE eq %APP_NAME%"

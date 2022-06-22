@@ -2,7 +2,6 @@ package org.ylzl.eden.demo.web;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.ylzl.eden.demo.api.UserService;
 import org.ylzl.eden.demo.api.dto.UserRequestDTO;
