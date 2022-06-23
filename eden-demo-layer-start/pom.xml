@@ -11,7 +11,7 @@
 	<artifactId>eden-demo-layer-start</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>eden-demo-layer</name>
+	<name>eden-demo-layer-start</name>
 	<description>应用启动入口</description>
 
 	<properties>
@@ -205,9 +205,19 @@
 
 		<!-- 测试组件 -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-test</artifactId>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-spock-spring-boot-starter</artifactId>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>HdrHistogram</artifactId>
+					<groupId>org.hdrhistogram</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jodd-core</artifactId>
+					<groupId>org.jodd</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- 监控组件 -->
