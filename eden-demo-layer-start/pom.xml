@@ -31,6 +31,10 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>ru.trylogic.maven.plugins</groupId>
+				<artifactId>redis-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -98,9 +102,9 @@
 								</ports>
 								<environment>
 									<TZ>Asia/Shanghai</TZ>
-									<SPRING_OUTPUT_ANSI_ENABLED>ALWAYS
-									</SPRING_OUTPUT_ANSI_ENABLED>
+									<SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
 									<JAVA_OPTS>-Xms256m -Xmx256m</JAVA_OPTS>
+									<ENV_OPTS/>
 									<JAVA_SLEEP>1</JAVA_SLEEP>
 								</environment>
 								<creationTime>USE_CURRENT_TIMESTAMP
@@ -158,9 +162,9 @@
 								</ports>
 								<environment>
 									<TZ>Asia/Shanghai</TZ>
-									<SPRING_OUTPUT_ANSI_ENABLED>ALWAYS
-									</SPRING_OUTPUT_ANSI_ENABLED>
+									<SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
 									<JAVA_OPTS>-Xms256m -Xmx256m</JAVA_OPTS>
+									<ENV_OPTS/>
 									<JAVA_SLEEP>1</JAVA_SLEEP>
 								</environment>
 								<creationTime>USE_CURRENT_TIMESTAMP
