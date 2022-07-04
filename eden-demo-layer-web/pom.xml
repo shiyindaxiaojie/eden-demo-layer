@@ -49,6 +49,23 @@
 			<artifactId>eden-spring-framework</artifactId>
 		</dependency>
 
+		<!-- 测试组件 -->
+		<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-spock-spring-boot-starter</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>HdrHistogram</artifactId>
+					<groupId>org.hdrhistogram</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jodd-core</artifactId>
+					<groupId>org.jodd</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<!-- WEB 组件 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
