@@ -86,6 +86,12 @@ spring:
 #      concurrency: 5 # 消费监听线程数，当配置值大于 Kafka 分区数，按分区数执行
 #      poll-timeout: 5000 # 单次拉取消息的超时（毫秒）
 #      ack-mode: MANUAL_IMMEDIATE # 手动提交模式
+  zipkin:
+    base-url: http://10.2.2.47:9411
+    discovery-client-enabled: false
+    locator:
+      discovery:
+        enabled: true
 
 #rocketmq:
 #  name-server: 10.2.2.45:9876;10.2.2.48:9876

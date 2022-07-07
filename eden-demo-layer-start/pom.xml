@@ -247,5 +247,11 @@
 			<groupId>org.ylzl</groupId>
 			<artifactId>eden-dubbo-spring-boot-starter</artifactId>
 		</dependency>
+
+		<!-- 服务链路跟踪组件 -->
+		<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-zipkin-spring-cloud-starter</artifactId>
+		</dependency>
 	</dependencies>
 </project>
