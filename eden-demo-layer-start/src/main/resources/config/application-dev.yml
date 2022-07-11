@@ -87,7 +87,7 @@ spring:
 #      poll-timeout: 5000 # 单次拉取消息的超时（毫秒）
 #      ack-mode: MANUAL_IMMEDIATE # 手动提交模式
   zipkin:
-    base-url: http://10.2.2.47:9411
+    base-url: http://localhost:9411
     discovery-client-enabled: false
     locator:
       discovery:
