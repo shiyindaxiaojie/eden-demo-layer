@@ -34,13 +34,12 @@
 * 1.5.x 分支对应的是 `eden-demo-layer 1.5.x`，最低支持 JDK 1.8。
 * 2.4.x 分支对应的是 `eden-demo-layer 2.4.x`，最低支持 JDK 1.8。
 
-分层架构使用 Maven 来构建，最快的使用方式是将本项目 `git clone` 到本地，然后执行以下命令：
+为了简化不必要的技术细节，本项目依赖 [eden-architect](https://github.com/shiyindaxiaojie/eden-architect)，本项目涉及的依赖项暂时没有发布到 Maven 中央仓库。请按下列步骤完成构建。
 
-```bash
-./mvnw install
-```
-
-执行完毕后，项目将被安装到本地 Maven 仓库。
+1. 克隆 [eden-architect](https://github.com/shiyindaxiaojie/eden-architect)
+   到本地，执行 `./mvnw install` 安装到本地 Maven 仓库，确保接下来的构建不会出现依赖错误。
+2. 构建本项目，执行 `./mvnw install` 即可。
+3. 我们提供了一些 CI/CD 平台的构建模板，例如 [CODING](https://coding.net/)，您可以在 `.coding`找到相关示例。
 
 ## 如何使用
 
@@ -56,7 +55,7 @@
 
 ### 运行您的应用
 
-- 在 `项目` 目录下运行 `mvn install`（如果不想运行测试，可以加上 `-DskipTests` 参数）。
+- 在项目目录下运行 `mvn install`（如果不想运行测试，可以加上 `-DskipTests` 参数）。
 - 进入 `eden-demo-cola-start` 目录，执行 `mvn spring-boot:run` 或者启动 `Application`
   类。运行成功的话，可以看到 `Spring Boot` 启动成功的界面。
 - 生成的应用中，已经实现了一个简单的 `Rest` 请求，可以在浏览器中输入 http://localhost:8080/api/users/1 进行测试。
