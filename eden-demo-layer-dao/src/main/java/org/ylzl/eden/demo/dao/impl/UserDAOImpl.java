@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * 用户（数据对象）存储访问实现
  *
  * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.x
+ * @since 2.4.13
  */
 @RequiredArgsConstructor
 @Repository
