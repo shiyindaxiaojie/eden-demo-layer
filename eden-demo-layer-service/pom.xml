@@ -63,7 +63,7 @@
 		<!-- 分布式组件 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-dubbo-spring-boot-starter</artifactId>
+			<artifactId>eden-dubbo-spring-cloud-starter</artifactId>
 		</dependency>
 	</dependencies>
 </project>
