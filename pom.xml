@@ -37,6 +37,7 @@
 
 	<properties>
 		<spring.profiles.active>prod</spring.profiles.active>
+		<maven.deploy.skip>true</maven.deploy.skip>
 	</properties>
 
 	<dependencyManagement>
@@ -70,16 +71,6 @@
 	</dependencyManagement>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<configuration>
-						<skip>true</skip>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

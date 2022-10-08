@@ -88,8 +88,8 @@ arthas:
   agent-id: ${spring.application.name}
   tunnel-server: ws://127.0.0.1:7777/ws
   session-timeout: 1800
-  telnet-port: 3658
-  http-port: 8563
+  telnet-port: 0
+  http-port: 0
 
 dubbo:
   application:
