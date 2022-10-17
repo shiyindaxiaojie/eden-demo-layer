@@ -17,6 +17,7 @@
 	<properties>
 		<start-class>org.ylzl.eden.demo.MvcApplication</start-class>
 		<maven.deploy.skip>true</maven.deploy.skip>
+		<build.layers.enabled>true</build.layers.enabled>
 	</properties>
 
 	<build>

@@ -2,6 +2,8 @@ logging:
   file:
     name: ${spring.application.name}
   config: classpath:log4j2.yml
+  level:
+    org.ylzl.eden: INFO
 
 server:
   port: 8081
