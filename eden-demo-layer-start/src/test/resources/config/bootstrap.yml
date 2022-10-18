@@ -20,7 +20,8 @@ spring:
         group: spring-cloud
   main:
     allow-bean-definition-overriding: true
-    banner-mode: off
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
 
 dubbo:
   enabled: false
