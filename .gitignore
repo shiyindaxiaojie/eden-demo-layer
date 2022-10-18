@@ -40,7 +40,6 @@ rebel.xml
 # Maven
 !.mvn/wrapper/maven-wrapper.jar
 !maven/wrapper/maven-wrapper.jar
-maven/
 node/
 target/
 .flattened-pom.xml

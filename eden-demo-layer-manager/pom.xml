@@ -5,25 +5,18 @@
 	<parent>
 		<groupId>org.ylzl.eden.demo</groupId>
 		<artifactId>eden-demo-layer</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>2.4.13.20221019</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>eden-demo-layer-manager</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>2.4.13.20221019</version>
 	<packaging>jar</packaging>
 	<name>eden-demo-layer-manager</name>
 	<description>通用业务处理层</description>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	<properties>
+		<maven.deploy.skip>true</maven.deploy.skip>
+	</properties>
 
 	<dependencies>
 		<!-- 数据访问组件 -->
@@ -52,16 +45,6 @@
 			<groupId>org.ylzl</groupId>
 			<artifactId>eden-spock-spring-boot-starter</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>HdrHistogram</artifactId>
-					<groupId>org.hdrhistogram</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>jodd-core</artifactId>
-					<groupId>org.jodd</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- 分布式缓存 -->

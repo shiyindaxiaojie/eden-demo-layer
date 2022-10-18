@@ -2,42 +2,49 @@ logging:
   file:
     name: ${spring.application.name}
   config: classpath:log4j2.yml
-
-mybatis-plus:
-  global-config:
-    banner: false
-  configuration:
-    map-underscore-to-camel-case: true
-    auto-mapping-behavior: full
+  level:
+    org.ylzl.eden: INFO
 
 server:
-  port: 8080
+  port: 8081
+  shutdown: graceful
   compression:
     enabled: true
-    mime-types: text/html,text/plain,text/css,application/javascript
     min-response-size: 1024
-#  netty:
-#    connection-timeout:
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+    threads:
+      io: 16
+      worker: 256
 #  tomcat:
-#    max-connections: 20000 # 最大连接数
+#    max-connections: 8192 # 最大连接数
 #    accept-count: 1000 # 接收队列长度
 #    threads:
 #      max: 500 # 最大并发数
 #      min-spare: 20 # 初始线程数
 
 spring:
+  arthas:
+    enabled: false
   data:
     redis:
       repositories:
         enabled: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    hikari: # https://github.com/brettwooldridge/HikariCP
+    hikari:
       connectionTimeout: 5000
       minimumIdle: 2
       maximumPoolSize: 10
       idleTimeout: 300000
       maxLifetime: 1200000
+#      connection-init-sql: SET NAMES utf8mb4
+  cloud:
+    sentinel:
+      enabled: false
+      http-method-specify: true # 兼容 RESTful
+      eager: true # 立刻刷新到 Dashboard
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     default-property-inclusion: non_null
@@ -48,8 +55,78 @@ spring:
     basename: i18n/messages
   main:
     allow-bean-definition-overriding: true
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
   thymeleaf:
     mode: HTML
+    cache: true
+  sleuth:
+    sampler:
+      probability: 1
+    async:
+      configurer:
+        enabled: false # Bugfix：与 Spring 高版本存在冲突
+  zipkin:
+    discovery-client-enabled: true
+    locator:
+      discovery:
+        enabled: true
+    sender:
+      type: kafka
+    kafka:
+      topic: zipkin
+  kafka:
+    producer:
+      batch-size: 4096
+      buffer-memory: 40960
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+mybatis-plus:
+  global-config:
+    banner: false
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+
+arthas:
+  agent-id: ${spring.application.name}
+  tunnel-server: ws://127.0.0.1:7777/ws
+  session-timeout: 1800
+  telnet-port: 0
+  http-port: 0
+
+dubbo:
+  application:
+    id: ${spring.application.name}-dubbo
+    name: ${spring.application.name}-dubbo
+  protocol:
+    name: dubbo
+    port: 28081
+  registry:
+    id: ${spring.application.name}-dubbo
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=DEFAULT_GROUP
+    protocol: nacos
+    check: false # 是否开启服务注册的启动检查
+    register: true # 是否开启服务注册，设置为 false 表示只订阅不注册
+  config-center:
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=DEFAULT_GROUP
+  metadata-report:
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=DEFAULT_GROUP
+  provider:
+    retries: 0    # 重试次数
+    timeout: 3000 # 超时时间
+    check: false # 是否开启检查
+  consumer:
+    retries: 0    # 重试次数
+    timeout: 3000 # 超时时间
+    check: false # 是否开启检查
+
+# 分布式调度平台
+xxl:
+  job:
+    enabled: false
+
+# 实时监控
+cat:
+  enabled: false

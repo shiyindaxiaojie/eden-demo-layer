@@ -1,38 +1,27 @@
 spring:
   application:
-    name: eden-demo-layer
+    name: eden-demo-cola
   cloud:
     nacos:
       config:
+        name: ${spring.application.name}
         file-extension: yaml
-  main:
-    allow-bean-definition-overriding: true
   profiles:
     active: dev # 默认启用开发环境
 
-dubbo:
-  application:
-    id: ${spring.application.name}-dubbo
-    name: ${spring.application.name}-dubbo
-  protocol:
-    name: dubbo
-    port: 28080
-  registry:
-    id: ${spring.application.name}-dubbo
-    protocol: nacos
-    check: false # 是否开启服务注册的启动检查
-    register: true # 是否开启服务注册，设置为 false 表示只订阅不注册
-  provider:
-    retries: 0    # 重试次数
-    timeout: 3000 # 超时时间
-  consumer:
-    check: false # 是否开启消费者的启动检查
-
 management:
+  server:
+    port: 9081
   endpoints:
     web:
+      base-path: /actuator
       exposure:
-        include: '*'
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: ALWAYS
   metrics:
     tags:
       application: ${spring.application.name}
+
+

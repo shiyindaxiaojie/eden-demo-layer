@@ -1,8 +1,6 @@
 logging:
   level:
     ROOT: INFO
-    org.ylzl.eden: DEBUG
-    org.ylzl.eden.demo.infrastructure: DEBUG
 
 spring:
   # 内存数据库
@@ -22,80 +20,85 @@ spring:
     password: demo
     # 单数据源
 #    driver-class-name: com.mysql.cj.jdbc.Driver
-#    username:
-#    password:
-#    url: jdbc:mysql://127.0.0.1:3306/dev?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+#    username: root
+#    password: admin123
+#    url: jdbc:mysql://localhost:5306/demo?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor&zipkinServiceName=${spring.application.name}
     # 多数据源，使用 @DS 切换
-#    dynamic:
-#      datasource:
-#        ds1:
-#          username:
-#          password:
-#          url: jdbc:mysql://localhost:3306/ds1?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
-#          type: ${spring.datasource.type}
-#          driver-class-name: ${spring.datasource.driver-class-name}
-#        ds2:
-#          username:
-#          password:
-#          url: jdbc:mysql://localhost:3306/ds2?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
-#          driver-class-name: ${spring.datasource.driver-class-name}
-#          type: ${spring.datasource.type}
-#      primary: ds1
-#      strict: true
+  #    dynamic:
+  #      datasource:
+  #        ds1:
+  #          username:
+  #          password:
+  #          url: jdbc:mysql://localhost:3306/ds1?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+  #          type: ${spring.datasource.type}
+  #          driver-class-name: ${spring.datasource.driver-class-name}
+  #        ds2:
+  #          username:
+  #          password:
+  #          url: jdbc:mysql://localhost:3306/ds2?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+  #          driver-class-name: ${spring.datasource.driver-class-name}
+  #          type: ${spring.datasource.type}
+  #      primary: ds1
+  #      strict: true
   # 分库分表组件
-#  shardingsphere:
-#    props:
-#      sql.show: true
-#    datasource:
-#      names: demo
-#      demo:
-#        username: ${spring.datasource.dynamic.datasource.demo.username}
-#        password: ${spring.datasource.dynamic.datasource.demo.password}
-#        driver-class-name: ${spring.datasource.dynamic.datasource.demo.driver-class-name}
-#        jdbc-url: ${spring.datasource.dynamic.datasource.demo.url}
-#        type: ${spring.datasource.dynamic.datasource.demo.type}
-#    sharding:
-#      defaultDataSourceName: demo
+  #  shardingsphere:
+  #    props:
+  #      sql.show: true
+  #    datasource:
+  #      names: demo
+  #      demo:
+  #        username: ${spring.datasource.dynamic.datasource.demo.username}
+  #        password: ${spring.datasource.dynamic.datasource.demo.password}
+  #        driver-class-name: ${spring.datasource.dynamic.datasource.demo.driver-class-name}
+  #        jdbc-url: ${spring.datasource.dynamic.datasource.demo.url}
+  #        type: ${spring.datasource.dynamic.datasource.demo.type}
+  #    sharding:
+  #      defaultDataSourceName: demo
+  cloud:
+    sentinel:
+      enabled: true
+      transport:
+        dashboard: localhost:8090
+      datasource:
+        flow:
+          nacos:
+            server-addr: ${spring.cloud.nacos.config.server-addr}
+            namespace: ${spring.cloud.nacos.config.namespace}
+            groupId: sentinel
+            dataId: ${spring.application.name}-flow-rule
+            rule-type: flow
+            data-type: json
   # 缓存数据库
   redis:
-    database: 1
-    host: localhost
-    port: 6379
     password:
     timeout: 5000
+    # 单机
+    database: 1
+    host: 10.2.2.41
+    port: 6379
+    # 集群
+#    cluster:
+#      nodes: 10.2.2.45:6379,10.2.2.48:6379,localhost:6379,localhost:6380,localhost:6381,localhost:6382
   # 模板引擎
   thymeleaf:
     cache: false
-  # 消息队列
-#  kafka:
-#    bootstrap-servers: 10.2.2.35:9092
-#    producer:
-#      batch-size: 4096
-#      buffer-memory: 40960
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-#    consumer:
-#      session-timeout: 10000 # 会话超时（毫秒）
-#      heartbeart-interval: 5000 # 心跳频率（毫秒），配置值不能超过会话超时
-#      max-poll-records: 100 # 单次拉取最大记录数
-#      fetch-max-wait: 5000 # 拉取消息最大等待时长
-#      group-id: ${spring.application.name} # 消费组，消费者多实例的情况下，配置同一个消费组，实例数不能超过 Kafka 的分区数
-#      enable-auto-commit: false # 建议关闭自动提交 Offset，不然报错很难处理
-#      auto-offset-reset: earliest # 如果 Offset 找不到时重置的规则
-#    listener:
-#      concurrency: 5 # 消费监听线程数，当配置值大于 Kafka 分区数，按分区数执行
-#      poll-timeout: 5000 # 单次拉取消息的超时（毫秒）
-#      ack-mode: MANUAL_IMMEDIATE # 手动提交模式
+  # 链路跟踪
+  zipkin:
+    base-url: http://localhost:9411
+  # 链路采集
+  kafka:
+    bootstrap-servers: localhost:9092
 
-#rocketmq:
-#  name-server: 10.2.2.45:9876;10.2.2.48:9876
-#  producer:
-#    group: ${spring.application.name}
-##      access-key:
-##      secret-key:
-#  consumer:
-#    group: ${spring.application.name}
-#    topic: demo
+# 消息队列
+rocketmq:
+  name-server: 10.2.2.45:9876;10.2.2.48:9876
+  producer:
+    group: ${spring.application.name}
+#    access-key:
+#    secret-key:
+  consumer:
+    group: ${spring.application.name}
+    topic: demo
 
 # 分布式调度平台
 #xxl:
@@ -105,7 +108,16 @@ spring:
 #    admin:
 #      addresses: http://localhost:8090/xxljob
 #    executor:
-#      app-name: demo-job
-#      port: 9999
+#      app-name: ${spring.application.name}
+#      ip:
+#      port: 8080
 #      log-path: /data/applogs/xxl-job/jobhandler/
 #      log-retention-days: 7
+
+# 实时监控
+cat:
+  enabled: true
+  home: C:\\Users\\sion1\\.cat
+  servers: 127.0.0.1
+  tcp-port: 2280
+  http-port: 8080
