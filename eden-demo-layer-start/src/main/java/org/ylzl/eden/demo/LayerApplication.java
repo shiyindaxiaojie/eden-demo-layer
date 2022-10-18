@@ -8,7 +8,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.ylzl.eden.spring.framework.bootstrap.SpringBootApplicationTemplate;
+import org.ylzl.eden.spring.framework.bootstrap.SpringBootApplicationHelper;
 import org.ylzl.eden.spring.framework.cola.rest.autoconfigure.EnableRestExceptionResolver;
 
 /**
@@ -24,7 +24,7 @@ import org.ylzl.eden.spring.framework.cola.rest.autoconfigure.EnableRestExceptio
 @EnableTransactionManagement
 @Slf4j
 @SpringBootApplication
-public class LayerApplication extends SpringBootApplicationTemplate {
+public class LayerApplication {
 
 	/**
 	 * 启动入口
@@ -32,6 +32,6 @@ public class LayerApplication extends SpringBootApplicationTemplate {
 	 * @param args 命令行参数
 	 */
 	public static void main(String[] args) {
-		run(LayerApplication.class, args, WebApplicationType.SERVLET);
+		SpringBootApplicationHelper.run(LayerApplication.class, args, WebApplicationType.SERVLET);
 	}
 }
