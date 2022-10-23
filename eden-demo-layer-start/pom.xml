@@ -78,6 +78,10 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<groupId>ru.trylogic.maven.plugins</groupId>
 				<artifactId>redis-maven-plugin</artifactId>
 			</plugin>
