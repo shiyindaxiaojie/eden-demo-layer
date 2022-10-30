@@ -13,11 +13,10 @@ import org.ylzl.eden.demo.dao.UserDAO;
 import org.ylzl.eden.demo.dao.repository.mybatis.dataobject.UserDO;
 import org.ylzl.eden.demo.dao.repository.mybatis.mapper.UserMapper;
 import org.ylzl.eden.demo.service.converter.UserConvertor;
-import org.ylzl.eden.spring.framework.cola.catchlog.autoconfigure.CatchLog;
 import org.ylzl.eden.spring.framework.cola.dto.PageResponse;
 import org.ylzl.eden.spring.framework.cola.dto.Response;
 import org.ylzl.eden.spring.framework.cola.dto.SingleResponse;
-import org.ylzl.eden.spring.framework.error.ClientErrorType;
+import org.ylzl.eden.spring.framework.error.ClientAssert;
 
 import java.util.List;
 
@@ -27,7 +26,6 @@ import java.util.List;
  * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.13
  */
-@CatchLog
 @RequiredArgsConstructor
 @Slf4j
 @Service("userService")
@@ -59,7 +57,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	@Override
 	public Response modifyUser(Long id, UserRequestDTO dto) {
 		UserDO userDO = userDAO.findById(id);
-		ClientErrorType.notNull(userDO, "A0201");
+		ClientAssert.notNull(userDO, "USER-FOUND-404");
 
 		userConvertor.updateDataObjectFromDTO(dto, userDO);
 		userDAO.updateById(userDO);
@@ -73,7 +71,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	 */
 	@Override
 	public Response removeUser(Long id) {
-		ClientErrorType.isTrue(userDAO.deleteById(id), "A0201");
+		ClientAssert.isTrue(userDAO.deleteById(id), "USER-FOUND-404");
 		return Response.buildSuccess();
 	}
 
@@ -86,7 +84,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	@Override
 	public SingleResponse<UserResponseDTO> getUserById(Long id) {
 		UserDO userDO = userDAO.findById(id);
-		ClientErrorType.notNull(userDO, "A0201");
+		ClientAssert.notNull(userDO, "USER-FOUND-404");
 		return SingleResponse.of(userConvertor.dataObjectToVO(userDO));
 	}
 
