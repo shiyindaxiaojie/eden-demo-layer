@@ -66,4 +66,3 @@ spring:
 #      port: 8080
 #      log-path: /data/applogs/xxl-job/jobhandler/
 #      log-retention-days: 7
-
