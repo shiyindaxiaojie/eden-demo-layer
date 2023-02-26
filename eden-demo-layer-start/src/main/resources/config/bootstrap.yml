@@ -1,17 +1,22 @@
 spring:
   application:
-    name: eden-demo-cola
+    name: eden-demo-layer
   cloud:
     nacos:
       config:
         name: ${spring.application.name}
         file-extension: yaml
   profiles:
-    active: dev # 默认启用开发环境
+    active: local # 默认启用本地环境
 
-management:
+logging: # 日志管理
+  file:
+    name: ${spring.application.name}
+    config: classpath:log4j2.yml
+
+management: # 端点管理
   server:
-    port: 9081
+    port: 9082
   endpoints:
     web:
       base-path: /actuator
@@ -23,5 +28,3 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-
-

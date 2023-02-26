@@ -2,7 +2,7 @@ package org.ylzl.eden.demo.dao;
 
 import com.github.pagehelper.Page;
 import org.ylzl.eden.demo.api.dto.UserPageQuery;
-import org.ylzl.eden.demo.dao.repository.mybatis.dataobject.UserDO;
+import org.ylzl.eden.demo.dao.database.dataobject.UserDO;
 
 /**
  * 用户（数据对象）存储访问接口

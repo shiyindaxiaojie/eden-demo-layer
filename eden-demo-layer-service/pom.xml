@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>org.ylzl.eden.demo</groupId>
 		<artifactId>eden-demo-layer</artifactId>
-		<version>2.4.13.20221030</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>eden-demo-layer-service</artifactId>
-	<version>2.4.13.20221030</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>eden-demo-layer-service</name>
 	<description>业务逻辑服务层</description>
@@ -39,18 +39,25 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.ylzl</groupId>
-			<artifactId>eden-spring-framework</artifactId>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<!-- 测试组件 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-spock-spring-boot-starter</artifactId>
+			<artifactId>eden-spring-boot-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- 事件审计 -->
+		<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-event-auditor</artifactId>
 		</dependency>
 
 		<!-- 分布式组件 -->

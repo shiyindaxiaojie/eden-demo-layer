@@ -1,81 +1,52 @@
-logging:
-  file:
-    name: ${spring.application.name}
-  config: classpath:log4j2.yml
-  level:
-    org.ylzl.eden: DEBUG
-
-server:
-  port: 8081
-  shutdown: graceful
-  compression:
-    enabled: true
-    min-response-size: 1024
-  undertow:
-    buffer-size: 1024
-    direct-buffers: true
-    threads:
-      io: 16
-      worker: 256
-#  tomcat:
-#    max-connections: 8192 # 最大连接数
-#    accept-count: 1000 # 接收队列长度
-#    threads:
-#      max: 500 # 最大并发数
-#      min-spare: 20 # 初始线程数
-
 spring:
   arthas:
-    enabled: false
-  data:
-    redis:
-      repositories:
-        enabled: true
+    enabled: false # 默认关闭，请按需开启
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    hikari:
+    hikari: # 数据源连接池组件
       connectionTimeout: 5000
       minimumIdle: 2
       maximumPoolSize: 10
       idleTimeout: 300000
       maxLifetime: 1200000
-#      connection-init-sql: SET NAMES utf8mb4
+#      connection-init-sql: SET NAMES utf8mb4 # 针对云数据库出现乱码的解决方案
   cloud:
-    sentinel:
-      enabled: false
+    sentinel: # 流量治理组件
+      enabled: false # 默认关闭，请按需开启
       http-method-specify: true # 兼容 RESTful
       eager: true # 立刻刷新到 Dashboard
-  jackson:
+  jackson: # 序列化组件
     date-format: yyyy-MM-dd HH:mm:ss
     default-property-inclusion: non_null
     serialization:
       indent-output: true
     time-zone: GMT+8
-  messages:
+  liquibase: # 数据库迁移工具
+    enabled: true # 默认关闭，请按需开启
+  messages: # 国际化消息
     basename: i18n/messages
   main:
     allow-bean-definition-overriding: true
   lifecycle:
     timeout-per-shutdown-phase: 30s
-  # 缓存数据库
-  redis:
+  redis: # 缓存数据库
     lettuce:
       pool:
         min-idle: 1
         max-idle: 64
         max-active: 64
         max-wait: -1
-  thymeleaf:
+  thymeleaf: # 模板引擎
     mode: HTML
     cache: true
-  sleuth:
+  sleuth: # 链路跟踪框架
     sampler:
       probability: 1
     async:
       configurer:
-        enabled: false # Bugfix：与 Spring 高版本存在冲突
-  zipkin:
-    enabled: false
+        enabled: false # 与 Spring 高版本存在冲突，关闭处理
+  zipkin: # 链路跟踪组件
+    enabled: false # 默认关闭，请按需开启
     discovery-client-enabled: true
     locator:
       discovery:
@@ -84,65 +55,134 @@ spring:
       type: kafka
     kafka:
       topic: zipkin
-  kafka:
+  kafka: # 消息引擎组件，这里负责处理 Zipkin
     producer:
       batch-size: 4096
       buffer-memory: 40960
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  dynamic:
+    tp: # 动态线程池
+      enabled: false
+      enabledBanner: false
+      enabledCollect: true
+      collectorTypes: micrometer
+      logPath: ${user.home}/logs
+      monitorInterval: 5
+      undertowTp:
+        corePoolSize: 16
+        maximumPoolSize: 256
+        keepAliveTime: 60
+      dubboTp:
+        - threadPoolName: ${spring.application.name}#dubboTp
+          corePoolSize: 16
+          maximumPoolSize: 256
+          keepAliveTime: 60
+      rocketMqTp:
+        - threadPoolName: ${spring.application.name}#rocketMqTp
+          corePoolSize: 16
+          maximumPoolSize: 256
+          keepAliveTime: 60
+      executors:
+        - threadPoolName: ${spring.application.name}#dtpExecutor
+          executorType: common
+          corePoolSize: 16
+          maximumPoolSize: 256
+          queueCapacity: 500
+          queueType: VariableLinkedBlockingQueue
+          rejectedHandlerType: CallerRunsPolicy
 
-# ORM 组件
-mybatis-plus:
+server:
+  port: 8082
+  shutdown: graceful # 优雅关闭
+  compression:
+    enabled: true # 开启压缩
+    min-response-size: 1024
+  undertow: # 高性能容器
+    buffer-size: 1024
+    direct-buffers: true
+    threads:
+      io: 16
+      worker: 256
+#  tomcat: # 传统容器
+#    uri-encoding: UTF-8
+#    max-connections: 8192 # 最大连接数
+#    accept-count: 1000 # 接收队列长度
+#    threads:
+#      max: 500 # 最大并发数
+#      min-spare: 20 # 初始线程数
+
+liquibase: # 数据库迁移工具
+  async: true # 异步执行
+
+mybatis-plus: # ORM 组件
   global-config:
     banner: false
   configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
     map-underscore-to-camel-case: true
     auto-mapping-behavior: full
+    call-setters-on-nulls: true
+    use-column-label: true
 
-# 在线诊断工具
-arthas:
+arthas: # 在线诊断工具
   agent-id: ${spring.application.name}@${random.value}
   tunnel-server: ws://localhost:7777/ws
   session-timeout: 1800
-  telnet-port: 0
-  http-port: 0
+  telnet-port: 0 # 随机端口
+  http-port: 0 # 随机端口
 
-# 分布式调用组件
-dubbo:
+dubbo: # 分布式调用组件
+  enabled: true # 默认关闭，请按需开启，请不要使用 @EnabledDubbo 原生注解，否则无法关闭
+  scan:
+    base-packages: org.ylzl.eden.demo.service.rpc # Dubbo 服务扫描
   application:
-    id: ${spring.application.name}-dubbo
-    name: ${spring.application.name}-dubbo
+    id: ${spring.application.name}
+    name: ${spring.application.name}
   protocol:
     name: dubbo
-    port: 28081
+    port: -1 # 随机端口
   registry:
-    id: ${spring.application.name}-dubbo
-    address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=DEFAULT_GROUP
+    id: ${spring.application.name}
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=dubbo
     protocol: nacos
     check: false # 是否开启服务注册的启动检查
     register: true # 是否开启服务注册，设置为 false 表示只订阅不注册
   config-center:
-    address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=DEFAULT_GROUP
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=config
   metadata-report:
-    address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=DEFAULT_GROUP
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=metadata
   provider:
-    retries: 0    # 重试次数
+    retries: 0 # 重试次数
     timeout: 3000 # 超时时间
     check: false # 是否开启检查
+    filter: cat-tracing
   consumer:
-    retries: 0    # 重试次数
+    retries: 0 # 重试次数
     timeout: 3000 # 超时时间
     check: false # 是否开启检查
+    filter: cat-tracing,cat-consumer
 
-# 分布式调度平台
-xxl:
+xxl: # 分布式调度平台
   job:
+    enabled: false # 默认关闭，请按需开启
+
+cat: # 实时监控平台
+  enabled: false # 默认关闭，请按需开启
+
+opentracing: # Jaeger
+  jaeger:
+    service-name: ${spring.application.name}
     enabled: false
+    log-spans: true
+    enable-b3-propagation: true
+    enable-w3c-propagation: true
+    const-sampler:
+      decision: true
+    probabilistic-sampler:
+      sampling-rate: 1
+  spring:
+    cloud:
+      async:
+        enabled: false
 
-# 实时监控
-cat:
-  enabled: false
-
-# 消息队列
-message-queue:
-  type: rocketmq

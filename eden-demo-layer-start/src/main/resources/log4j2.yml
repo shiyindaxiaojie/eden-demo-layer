@@ -8,10 +8,10 @@ Configuration:
         value: $${spring:logging.file.name:-app}
       - name: file.path
         value: $${spring:logging.file.path:-/var/logs}
-      - name: console.pattern
-        value: "%d | %X{traceId} | %X{spanId} | %-5level | %C{1.}.%M:%L | %t | %msg%n%throwable"
       - name: file.pattern
-        value: "%d | %-5level | %C{1.}.%M:%L | %t | %msg%n%throwable"
+        value: "%d | %-5level | %X{traceId} | %C{1.}.%M:%L | %t | %msg%n%throwable"
+      - name: console.pattern
+        value: "%d | %-5level | %X{traceId} | %C{1.}.%M:%L | %t | %msg%n%throwable"
 
   Appenders:
     Console:
@@ -34,6 +34,11 @@ Configuration:
           size: "20MB"
       DefaultRolloverStrategy:
         max: 15
+    CAT: # 自定义附加器
+      name: CAT
+      level: INFO
+      PatternLayout:
+        pattern: ${console.pattern}
 
   Loggers:
     Root:
@@ -42,26 +47,29 @@ Configuration:
       AppenderRef:
         - ref: CONSOLE
         - ref: ROLLING_FILE
+        - ref: CAT # 默认关闭，开启后将日志发送到 CAT 监控平台
     Logger:
       - name: org.ylzl
         level: INFO
-      - name: com.ibatis
-        level: INFO
       - name: com.alibaba
         level: WARN
-      - name: org.springframework
+      - name: com.baomidou
         level: ERROR
+      - name: com.ibatis
+        level: WARN
       - name: org.apache.dubbo
+        level: WARN
+      - name: org.apache.nacos
         level: WARN
       - name: org.apache.kafka
         level: WARN
       - name: org.apache.zookeeper
         level: WARN
-      - name: org.reflections.Reflections
+      - name: org.hibernate.validator
         level: WARN
       - name: org.jboss.resteasy
         level: WARN
-      - name: com.baomidou
-        level: ERROR
-      - name: org.hibernate.validator
+      - name: org.reflections.Reflections
         level: WARN
+      - name: org.springframework
+        level: ERROR

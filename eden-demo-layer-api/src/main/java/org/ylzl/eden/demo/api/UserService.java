@@ -1,11 +1,11 @@
 package org.ylzl.eden.demo.api;
 
-import org.ylzl.eden.spring.framework.cola.dto.PageResponse;
-import org.ylzl.eden.spring.framework.cola.dto.Response;
-import org.ylzl.eden.spring.framework.cola.dto.SingleResponse;
-import org.ylzl.eden.demo.api.dto.UserRequestDTO;
 import org.ylzl.eden.demo.api.dto.UserPageQuery;
+import org.ylzl.eden.demo.api.dto.UserRequestDTO;
 import org.ylzl.eden.demo.api.dto.UserResponseDTO;
+import org.ylzl.eden.spring.framework.dto.PageResult;
+import org.ylzl.eden.spring.framework.dto.Result;
+import org.ylzl.eden.spring.framework.dto.SingleResult;
 
 /**
  * 用户业务逻辑接口
@@ -20,7 +20,7 @@ public interface UserService {
 	 *
 	 * @param dto
 	 */
-	Response createUser(UserRequestDTO dto);
+	Result createUser(UserRequestDTO dto);
 
 	/**
 	 * 修改用户
@@ -28,14 +28,14 @@ public interface UserService {
 	 * @param id
 	 * @param dto
 	 */
-	Response modifyUser(Long id, UserRequestDTO dto);
+	Result modifyUser(Long id, UserRequestDTO dto);
 
 	/**
 	 * 删除用户
 	 *
 	 * @param id
 	 */
-	Response removeUser(Long id);
+	Result removeUser(Long id);
 
 	/**
 	 * 获取用户信息
@@ -43,7 +43,7 @@ public interface UserService {
 	 * @param id
 	 * @return
 	 */
-	SingleResponse<UserResponseDTO> getUserById(Long id);
+	SingleResult<UserResponseDTO> getUserById(Long id);
 
 	/**
 	 * 获取用户分页
@@ -51,5 +51,5 @@ public interface UserService {
 	 * @param query
 	 * @return
 	 */
-	PageResponse<UserResponseDTO> listUserByPage(UserPageQuery query);
+	PageResult<UserResponseDTO> listUserByPage(UserPageQuery query);
 }

@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>org.ylzl.eden.demo</groupId>
 		<artifactId>eden-demo-layer</artifactId>
-		<version>2.4.13.20221030</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>eden-demo-layer-start</artifactId>
-	<version>2.4.13.20221030</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>eden-demo-layer-start</name>
 	<description>应用启动入口</description>
@@ -77,14 +77,6 @@
 					</allowInsecureRegistries>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>ru.trylogic.maven.plugins</groupId>
-				<artifactId>redis-maven-plugin</artifactId>
-			</plugin>
 		</plugins>
 	</build>
 
@@ -109,7 +101,7 @@
 		<!-- 测试组件 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-spock-spring-boot-starter</artifactId>
+			<artifactId>eden-spring-boot-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
@@ -131,17 +123,21 @@
 			<artifactId>eden-dubbo-spring-cloud-starter</artifactId>
 		</dependency>
 
-		<!-- 熔断降级组件 -->
+		<!-- 熔断降级组件，推荐使用 https://github.com/shiyindaxiaojie/Sentinel -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
 			<artifactId>eden-sentinel-spring-cloud-starter</artifactId>
 		</dependency>
 
-		<!-- 链路跟踪组件 -->
-		<dependency>
+		<!-- 链路跟踪组件，推荐使用魔改的 CAT 组件，内置链路、日志、监控一站式解决方案 -->
+		<!--<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-zipkin-spring-cloud-starter</artifactId>
-		</dependency>
+			<artifactId>eden-zipkin2-spring-cloud-starter</artifactId>
+		</dependency>-->
+		<!--<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-jaeger-spring-cloud-starter</artifactId>
+		</dependency>-->
 
 		<!-- 服务监控组件 -->
 		<dependency>
@@ -149,7 +145,15 @@
 			<artifactId>eden-prometheus-spring-boot-starter</artifactId>
 		</dependency>
 
+		<!-- 实时监控组件 -->
+		<!-- 推荐使用 https://github.com/shiyindaxiaojie/cat，支持链路追踪 -->
+		<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-cat-spring-boot-starter</artifactId>
+		</dependency>
+
 		<!-- 线上诊断组件 -->
+		<!-- 推荐使用 https://github.com/shiyindaxiaojie/arthas/tree/master/tunnel-server2，支持服务发现 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
 			<artifactId>eden-arthas-spring-boot-starter</artifactId>

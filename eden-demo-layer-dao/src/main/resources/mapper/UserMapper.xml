@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2012-2019 the original author or authors.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.ylzl.eden.demo.infrastructure.user.database.mapper.UserMapper">
+
+	<!-- 数据库字段映射（工具自动生成） -->
+	<resultMap id="dbResultMap"
+			   type="org.ylzl.eden.demo.dao.database.dataobject.UserDO">
+		<result column="id" property="id"/>
+		<result column="login" property="login"/>
+		<result column="password_hash" property="passwordHash"/>
+		<result column="email" property="email"/>
+		<result column="activated" property="activated"/>
+		<result column="locked" property="locked"/>
+		<result column="lang_key" property="langKey"/>
+		<result column="activation_key" property="activationKey"/>
+		<result column="reset_key" property="resetKey"/>
+		<result column="reset_date" property="resetDate"/>
+		<result column="created_by" property="createdBy"/>
+		<result column="created_date" property="createdDate"/>
+		<result column="last_modified_by" property="lastModifiedBy"/>
+		<result column="last_modified_date" property="lastModifiedDate"/>
+	</resultMap>
+
+	<!-- 分页查询 -->
+	<select id="selectPage"
+			resultType="org.ylzl.eden.demo.dao.database.dataobject.UserDO">
+		SELECT id, login, email, activated, locked, lang_key
+		FROM demo_user
+		<include refid="selectPageCondition"/>
+	</select>
+
+	<!-- 分页条件 -->
+	<sql id="selectPageCondition">
+		<where>
+			<if test="login != null">
+				AND login = #{login}
+			</if>
+		</where>
+	</sql>
+
+</mapper>
