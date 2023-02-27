@@ -2,12 +2,11 @@ package org.ylzl.eden.demo.service.converter;
 
 import org.ylzl.eden.demo.api.dto.UserRequestDTO;
 import org.ylzl.eden.demo.api.dto.UserResponseDTO;
-import org.ylzl.eden.demo.dao.repository.mybatis.dataobject.UserDO;
+import org.ylzl.eden.demo.dao.database.dataobject.UserDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 

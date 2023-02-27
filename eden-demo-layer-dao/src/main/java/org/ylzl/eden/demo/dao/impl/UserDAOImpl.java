@@ -5,8 +5,8 @@ import com.github.pagehelper.PageHelper;
 import lombok.RequiredArgsConstructor;
 import org.ylzl.eden.demo.api.dto.UserPageQuery;
 import org.ylzl.eden.demo.dao.UserDAO;
-import org.ylzl.eden.demo.dao.repository.mybatis.dataobject.UserDO;
-import org.ylzl.eden.demo.dao.repository.mybatis.mapper.UserMapper;
+import org.ylzl.eden.demo.dao.database.dataobject.UserDO;
+import org.ylzl.eden.demo.dao.database.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
 
 /**

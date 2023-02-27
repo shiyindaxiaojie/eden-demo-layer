@@ -1,0 +1,87 @@
+@startuml
+
+!if %variable_exists("$THEME")
+title 阿里巴巴分层应用架构组件图 - $THEME theme
+!else
+title 阿里巴巴分层应用架构组件图
+!endif
+
+'skinparam BackgroundColor transparent
+
+[eden-demo-layer-web] <<请求处理层>>
+[eden-demo-layer-api] <<API层>>
+[eden-demo-layer-service] <<业务逻辑服务层>>
+[eden-demo-layer-manager] <<通用业务处理层>>
+[eden-demo-layer-dao] <<数据持久层>>
+[eden-demo-layer-start] <<启动入口>>
+
+[eden-demo-layer-start] --> [eden-demo-layer-web]
+[eden-demo-layer-web] --> [eden-demo-layer-api]: 暴露接口
+[eden-demo-layer-web] --> [eden-demo-layer-service]: JVM调用
+[eden-demo-layer-service] --> [eden-demo-layer-api]: 实现接口
+[eden-demo-layer-service] --> [eden-demo-layer-dao]: 数据操作
+[eden-demo-layer-service] --> [eden-demo-layer-manager]: 业务编排
+[eden-demo-layer-manager] --> [eden-demo-layer-dao]: 通用DAO封装
+
+node "APP终端" <<主动适配器>>
+cloud "RPC调用方" <<主动适配器>>
+control "Job调度平台" <<主动适配器>>
+queue "MQ消息队列" <<主动适配器>>
+
+cloud "第三方接口" <<被动驱动器>>
+database "MySQL" <<被动驱动器>>
+database "Redis" <<被动驱动器>>
+database "MQ" <<被动驱动器>>
+database "Elasticsearch" <<被动驱动器>>
+database "MongoDB" <<被动驱动器>>
+
+http -r- [eden-demo-layer-web]: REST 接口
+[APP终端] .d.> http: 前后端对接
+[eden-demo-layer-service] -u-> rpc: RPC 接口
+[RPC调用方] ..> rpc: 调用
+[RPC调用方] ..> [eden-demo-layer-api]: 代码集成
+[Job调度平台] <.d.> [eden-demo-layer-manager]: 任务调度
+[eden-demo-layer-manager] <.u.> [MQ消息队列]: 消费消息
+
+[eden-demo-layer-dao] .d.> MySQL: 读写数据
+[eden-demo-layer-dao] .d.> Elasticsearch: 读写索引
+[eden-demo-layer-dao] .d.> MongoDB: 读写数据
+[eden-demo-layer-manager] .d.> MQ: 生产消息
+[eden-demo-layer-manager] .d.> Redis: 缓存管理
+[eden-demo-layer-manager] .d.> 第三方接口: 封装SDK
+
+skinparam component {
+ 	backgroundColor<<请求处理层>> LightGreen
+    backgroundColor<<业务逻辑服务层>> LightGreen
+    backgroundColor<<通用业务处理层>> LightGreen
+    backgroundColor<<数据持久层>> LightGreen
+    backgroundColor<<启动入口>> LightGreen
+    backgroundColor<<API层>> Khaki
+}
+
+skinparam cloud {
+    backgroundColor<<主动适配器>> SkyBlue
+    backgroundColor<<被动驱动器>> Pink
+}
+
+skinparam database {
+    backgroundColor<<主动适配器>> SkyBlue
+    backgroundColor<<被动驱动器>> Pink
+}
+
+skinparam queue {
+    backgroundColor<<主动适配器>> SkyBlue
+    backgroundColor<<被动驱动器>> Pink
+}
+
+skinparam control {
+    backgroundColor<<主动适配器>> SkyBlue
+    backgroundColor<<被动驱动器>> Pink
+}
+
+skinparam node {
+    backgroundColor<<主动适配器>> SkyBlue
+    backgroundColor<<被动驱动器>> Pink
+}
+
+@enduml

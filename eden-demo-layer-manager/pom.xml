@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>org.ylzl.eden.demo</groupId>
 		<artifactId>eden-demo-layer</artifactId>
-		<version>2.4.13.20221030</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>eden-demo-layer-manager</artifactId>
-	<version>2.4.13.20221030</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>eden-demo-layer-manager</name>
 	<description>通用业务处理层</description>
@@ -35,40 +35,34 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.ylzl</groupId>
-			<artifactId>eden-spring-framework</artifactId>
-		</dependency>
 
 		<!-- 测试组件 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-spock-spring-boot-starter</artifactId>
+			<artifactId>eden-spring-boot-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
-		<!-- 分布式缓存 -->
-		<!--<dependency>
+		<!-- 缓存组件 -->
+		<dependency>
 			<groupId>org.ylzl</groupId>
 			<artifactId>eden-redis-spring-boot-starter</artifactId>
-		</dependency>-->
-
-		<!-- 本地缓存 -->
-		<!--<dependency>
-			<groupId>org.ylzl</groupId>
-			<artifactId>eden-caffeine-spring-boot-starter</artifactId>
-		</dependency>-->
+		</dependency>
 
 		<!-- 消息队列 -->
-		<!--<dependency>
+		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-kafka-spring-boot-starter</artifactId>
-		</dependency>-->
+			<artifactId>eden-rocketmq-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-common-mq-spring-boot-starter</artifactId>
+		</dependency>
 
-		<!-- 任务调度 -->
-		<!--<dependency>
+		<!--  任务调度 -->
+		<dependency>
 			<groupId>org.ylzl</groupId>
 			<artifactId>eden-xxljob-spring-boot-starter</artifactId>
-		</dependency>-->
+		</dependency>
 	</dependencies>
 </project>

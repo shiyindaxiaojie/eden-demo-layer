@@ -10,12 +10,12 @@ import org.ylzl.eden.demo.api.dto.UserPageQuery;
 import org.ylzl.eden.demo.api.dto.UserRequestDTO;
 import org.ylzl.eden.demo.api.dto.UserResponseDTO;
 import org.ylzl.eden.demo.dao.UserDAO;
-import org.ylzl.eden.demo.dao.repository.mybatis.dataobject.UserDO;
-import org.ylzl.eden.demo.dao.repository.mybatis.mapper.UserMapper;
+import org.ylzl.eden.demo.dao.database.dataobject.UserDO;
+import org.ylzl.eden.demo.dao.database.mapper.UserMapper;
 import org.ylzl.eden.demo.service.converter.UserConvertor;
-import org.ylzl.eden.spring.framework.cola.dto.PageResponse;
-import org.ylzl.eden.spring.framework.cola.dto.Response;
-import org.ylzl.eden.spring.framework.cola.dto.SingleResponse;
+import org.ylzl.eden.spring.framework.dto.PageResult;
+import org.ylzl.eden.spring.framework.dto.Result;
+import org.ylzl.eden.spring.framework.dto.SingleResult;
 import org.ylzl.eden.spring.framework.error.ClientAssert;
 
 import java.util.List;
@@ -42,10 +42,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	 * @return
 	 */
 	@Override
-	public Response createUser(UserRequestDTO dto) {
+	public Result createUser(UserRequestDTO dto) {
 		UserDO userDO = userConvertor.dtoToDataObject(dto);
 		userDAO.save(userDO);
-		return Response.buildSuccess();
+		return Result.buildSuccess();
 	}
 
 	/**
@@ -55,13 +55,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	 * @param dto
 	 */
 	@Override
-	public Response modifyUser(Long id, UserRequestDTO dto) {
+	public Result modifyUser(Long id, UserRequestDTO dto) {
 		UserDO userDO = userDAO.findById(id);
 		ClientAssert.notNull(userDO, "USER-FOUND-404");
 
 		userConvertor.updateDataObjectFromDTO(dto, userDO);
 		userDAO.updateById(userDO);
-		return Response.buildSuccess();
+		return Result.buildSuccess();
 	}
 
 	/**
@@ -70,9 +70,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	 * @param id
 	 */
 	@Override
-	public Response removeUser(Long id) {
+	public Result removeUser(Long id) {
 		ClientAssert.isTrue(userDAO.deleteById(id), "USER-FOUND-404");
-		return Response.buildSuccess();
+		return Result.buildSuccess();
 	}
 
 	/**
@@ -82,10 +82,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	 * @return
 	 */
 	@Override
-	public SingleResponse<UserResponseDTO> getUserById(Long id) {
+	public SingleResult<UserResponseDTO> getUserById(Long id) {
+		log.info("test");
 		UserDO userDO = userDAO.findById(id);
 		ClientAssert.notNull(userDO, "USER-FOUND-404");
-		return SingleResponse.of(userConvertor.dataObjectToVO(userDO));
+		return SingleResult.build(userConvertor.dataObjectToVO(userDO));
 	}
 
 	/**
@@ -95,11 +96,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	 * @return
 	 */
 	@Override
-	public PageResponse<UserResponseDTO> listUserByPage(UserPageQuery query) {
+	public PageResult<UserResponseDTO> listUserByPage(UserPageQuery query) {
 		Page<UserDO> page = userDAO.findByPage(query);
 		List<UserResponseDTO> userVOList = userConvertor.dataObjectListToVOList(page.getResult());
-		return PageResponse.of(userVOList,
-			Integer.parseInt(String.valueOf(page.getTotal())),
-			query.getPageSize(), query.getPageIndex());
+		return PageResult.build(userVOList, Integer.parseInt(String.valueOf(page.getTotal())));
 	}
 }

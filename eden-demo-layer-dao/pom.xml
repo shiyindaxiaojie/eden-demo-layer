@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>org.ylzl.eden.demo</groupId>
 		<artifactId>eden-demo-layer</artifactId>
-		<version>2.4.13.20221030</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>eden-demo-layer-dao</artifactId>
-	<version>2.4.13.20221030</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>eden-demo-layer-dao</name>
 	<description>数据持久层</description>
@@ -39,51 +39,50 @@
 		<!-- 测试组件 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-spock-spring-boot-starter</artifactId>
+			<artifactId>eden-spring-boot-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
-		<!-- 持久化组件 -->
+		<!-- 数据库组件 -->
 		<dependency>
-			<groupId>org.ylzl</groupId>
-			<artifactId>eden-spring-data</artifactId>
-		</dependency>
-		<!-- HikariCP -->
-		<dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
-		</dependency>
-		<!-- MySQL -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- H2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- Mybatis -->
+
+		<!-- 数据库连接池组件 -->
+		<dependency>
+			<groupId>org.ylzl</groupId>
+			<artifactId>eden-hikaricp-spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- 数据库访问组件 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
 			<artifactId>eden-mybatis-spring-boot-starter</artifactId>
 		</dependency>
-		<!-- Liquibase -->
+
+		<!-- 数据库版本控制组件 -->
 		<dependency>
 			<groupId>org.ylzl</groupId>
 			<artifactId>eden-liquibase-spring-boot-starter</artifactId>
 		</dependency>
-		<!-- Dynamic Datasource -->
-		<!--<dependency>
+
+		<!-- 动态数据源组件 -->
+		<dependency>
 			<groupId>org.ylzl</groupId>
 			<artifactId>eden-dynamic-datasource-spring-boot-starter</artifactId>
-		</dependency>-->
-		<!-- Sharding JDBC -->
-		<!--<dependency>
+		</dependency>
+
+		<!-- 分库分表组件 -->
+		<dependency>
 			<groupId>org.ylzl</groupId>
-			<artifactId>eden-sharding-jdbc-spring-boot-starter</artifactId>
-		</dependency>-->
+			<artifactId>eden-shardingsphere-spring-boot-starter</artifactId>
+		</dependency>
 	</dependencies>
 </project>
