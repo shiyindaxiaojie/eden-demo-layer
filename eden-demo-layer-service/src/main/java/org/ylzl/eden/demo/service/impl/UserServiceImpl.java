@@ -83,7 +83,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	 */
 	@Override
 	public SingleResult<UserResponseDTO> getUserById(Long id) {
-		log.info("test");
 		UserDO userDO = userDAO.findById(id);
 		ClientAssert.notNull(userDO, "USER-FOUND-404");
 		return SingleResult.build(userConvertor.dataObjectToVO(userDO));

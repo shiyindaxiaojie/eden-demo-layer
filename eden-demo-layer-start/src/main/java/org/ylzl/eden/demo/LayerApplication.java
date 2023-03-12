@@ -16,9 +16,8 @@ import org.ylzl.eden.spring.framework.web.rest.annotation.EnableRestExceptionHan
  * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
  * @since 2.4.13
  */
-@EnableRestExceptionHandler
-@MapperScan(basePackages = "org.ylzl.eden.demo.dao", annotationClass = Mapper.class)
 @EnableDiscoveryClient
+@EnableRestExceptionHandler
 @EnableTransactionManagement
 @Slf4j
 @SpringBootApplication

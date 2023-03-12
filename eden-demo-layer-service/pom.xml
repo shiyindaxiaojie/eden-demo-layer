@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.ylzl.eden.demo</groupId>
+		<groupId>io.github.shiyindaxiaojie.eden.demo</groupId>
 		<artifactId>eden-demo-layer</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
@@ -21,17 +21,17 @@
 	<dependencies>
 		<!-- API 组件 -->
 		<dependency>
-			<groupId>org.ylzl.eden.demo</groupId>
+			<groupId>io.github.shiyindaxiaojie.eden.demo</groupId>
 			<artifactId>eden-demo-layer-api</artifactId>
 		</dependency>
 		<!-- 数据访问组件 -->
 		<dependency>
-			<groupId>org.ylzl.eden.demo</groupId>
+			<groupId>io.github.shiyindaxiaojie.eden.demo</groupId>
 			<artifactId>eden-demo-layer-dao</artifactId>
 		</dependency>
 		<!-- 管理组件 -->
 		<dependency>
-			<groupId>org.ylzl.eden.demo</groupId>
+			<groupId>io.github.shiyindaxiaojie.eden.demo</groupId>
 			<artifactId>eden-demo-layer-manager</artifactId>
 		</dependency>
 
@@ -49,20 +49,20 @@
 
 		<!-- 测试组件 -->
 		<dependency>
-			<groupId>org.ylzl</groupId>
+			<groupId>io.github.shiyindaxiaojie</groupId>
 			<artifactId>eden-spring-boot-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
 		<!-- 事件审计 -->
 		<dependency>
-			<groupId>org.ylzl</groupId>
+			<groupId>io.github.shiyindaxiaojie</groupId>
 			<artifactId>eden-event-auditor</artifactId>
 		</dependency>
 
 		<!-- 分布式组件 -->
 		<dependency>
-			<groupId>org.ylzl</groupId>
+			<groupId>io.github.shiyindaxiaojie</groupId>
 			<artifactId>eden-dubbo-spring-cloud-starter</artifactId>
 		</dependency>
 	</dependencies>

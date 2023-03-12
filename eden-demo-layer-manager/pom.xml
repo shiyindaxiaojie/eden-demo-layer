@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.ylzl.eden.demo</groupId>
+		<groupId>io.github.shiyindaxiaojie.eden.demo</groupId>
 		<artifactId>eden-demo-layer</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
@@ -21,7 +21,7 @@
 	<dependencies>
 		<!-- 数据访问组件 -->
 		<dependency>
-			<groupId>org.ylzl.eden.demo</groupId>
+			<groupId>io.github.shiyindaxiaojie.eden.demo</groupId>
 			<artifactId>eden-demo-layer-dao</artifactId>
 		</dependency>
 
@@ -38,30 +38,30 @@
 
 		<!-- 测试组件 -->
 		<dependency>
-			<groupId>org.ylzl</groupId>
+			<groupId>io.github.shiyindaxiaojie</groupId>
 			<artifactId>eden-spring-boot-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
 		<!-- 缓存组件 -->
 		<dependency>
-			<groupId>org.ylzl</groupId>
+			<groupId>io.github.shiyindaxiaojie</groupId>
 			<artifactId>eden-redis-spring-boot-starter</artifactId>
 		</dependency>
 
 		<!-- 消息队列 -->
 		<dependency>
-			<groupId>org.ylzl</groupId>
+			<groupId>io.github.shiyindaxiaojie</groupId>
 			<artifactId>eden-rocketmq-spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.ylzl</groupId>
+			<groupId>io.github.shiyindaxiaojie</groupId>
 			<artifactId>eden-common-mq-spring-boot-starter</artifactId>
 		</dependency>
 
 		<!--  任务调度 -->
 		<dependency>
-			<groupId>org.ylzl</groupId>
+			<groupId>io.github.shiyindaxiaojie</groupId>
 			<artifactId>eden-xxljob-spring-boot-starter</artifactId>
 		</dependency>
 	</dependencies>

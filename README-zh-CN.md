@@ -35,10 +35,7 @@
 * 2.7.x 分支适用于 `Spring Boot 2.7.x`，最低支持 JDK 11。
 * 3.0.x 分支适用于 `Spring Boot 3.0.x`，最低支持 JDK 17。
 
-本项目默认使用 Maven 来构建，最快的使用方式是 `git clone` 到本地。为了简化不必要的技术细节，本项目依赖 [eden-architect](https://github.com/shiyindaxiaojie/eden-architect)（孵化中），涉及的依赖项暂时没有发布到 Maven 中央仓库。请按下列步骤完成构建。
-
-1. 克隆 [eden-architect](https://github.com/shiyindaxiaojie/eden-architect) 到本地，在根目录执行 `./mvnw install -T 4C` 安装到本地 Maven 仓库。
-2. 在 `eden-demo-layer` 目录执行 `./mvnw install -T 4C` 完成本项目的构建。
+本项目默认使用 Maven 来构建，最快的使用方式是 `git clone` 到本地。为了简化不必要的技术细节，本项目依赖 [eden-architect](https://github.com/shiyindaxiaojie/eden-architect)，在项目的根目录执行 `mvn install -T 4C` 完成本项目的构建。
 
 ## 如何启动
 
@@ -47,17 +44,45 @@
 本项目默认设置了 local 环境运行，所有外部的组件依赖均为关闭状态。
 
 1. 在项目目录下运行 `mvn install`（如果不想运行测试，可以加上 `-DskipTests` 参数）。
-2. 进入 `eden-demo-cola-start` 目录，执行 `mvn spring-boot:run` 或者启动 `ColaApplication` 类。运行成功的话，可以看到 `Spring Boot` 启动成功的界面。
+2. 进入 `eden-demo-layer-start` 目录，执行 `mvn spring-boot:run` 或者启动 `LayerApplication` 类。运行成功的话，可以看到 `Spring Boot` 启动成功的界面。
 3. 本应用中已经实现了一个简单的 `RestController` 接口，可以点击 [演示接口](http://localhost:8081/api/users/1) 进行调试。
-4. 如果您加班累了，也可以点击 [http://localhost:8081](http://localhost:8081)，逃离地球 ☺
+4. 由于目前的主流是前后端分离开发，请按需实现页面。访问 [http://localhost:8082](http://localhost:8082) 将跳转到 404 页面。
 
 ![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/eden-images/common/404.png)
 
 ### 微调配置
 
-1. 修改 Nacos 客户端配置，您可以查阅 [Nacos Quick Start](https://nacos.io/zh-cn/docs/quick-start.html) 快速搭建，请根据您的 Nacos 地址修改配置文件：[bootstrap-local.yml](https://github.com/shiyindaxiaojie/eden-demo-cola/blob/main/eden-demo-cola-start/src/main/resources/config/bootstrap-local.yml)
-2. 修改数据库的配置，本项目默认使用 H2 内存数据库启动，基于 `Liquibase` 在项目启动时自动初始化 SQL 脚本。如果您使用的是外部的 MySQL 数据库，可以从此处调整下数据库的连接信息：[application-local.yml](https://github.com/shiyindaxiaojie/eden-demo-cola/blob/main/eden-demo-cola-start/src/main/resources/config/application-local.yml)
-3. 本项目罗列了 `Redis` 缓存、`RocketMQ` 消息队列、`ShardingSphere` 分库分表等常用组件的使用方案，默认通过 `xxx.enabled` 关闭自动配置。您可以根据实际情况开启配置，直接完成组件的集成。
+**开启配置中心**：推荐使用 `Nacos` 组件，您可以查阅 [Nacos Quick Start](https://nacos.io/zh-cn/docs/quick-start.html) 快速搭建，请根据您的 Nacos 地址修改配置文件：[bootstrap-local.yml](https://github.com/shiyindaxiaojie/eden-demo-layer/blob/main/eden-demo-layer-start/src/main/resources/config/bootstrap-local.yml)，调整以下内容：
+
+```yaml
+spring:
+  cloud:
+    nacos:
+      discovery: # 注册中心
+        enabled: true # 默认关闭，请按需开启
+      config: # 配置中心
+        enabled: true # 默认关闭，请按需开启
+```
+
+**修改默认的数据源**：本项目默认使用 `H2` 内存数据库启动，基于 `Liquibase` 在项目启动时自动初始化 SQL 脚本。如果您使用的是外部的 MySQL 数据库，可以从此处调整下数据库的连接信息：[application-local.yml](https://github.com/shiyindaxiaojie/eden-demo-layer/blob/main/eden-demo-layer-start/src/main/resources/config/application-local.yml)，请删除任何与 `H2` 有关的配置。
+
+```yaml
+spring:
+    #  h2: # 内存数据库
+    #    console:
+    #      enabled: true # 线上环境请勿设置
+    #      path: /h2-console
+    #      settings:
+    #        trace: false
+    #        web-allow-others: false
+    datasource: # 数据源管理
+        username:
+        password:
+        url: jdbc:mysql://host:port/schema?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        driver-class-name: com.mysql.cj.jdbc.Driver
+```
+
+此外，本项目还罗列了 `Redis` 缓存、`RocketMQ` 消息队列、`ShardingSphere` 分库分表等常用组件的使用方案，默认通过 `xxx.enabled` 关闭自动配置。您可以根据实际情况开启配置，直接完成组件的集成。
 
 ## 版本规范
 
@@ -75,7 +100,7 @@
 
 ## 持续集成
 
-CI/CD 工具选型：Jenkins、Zadig、Codeup、CODING...
+> CI/CD 工具选型：Jenkins、Zadig、Codeup、CODING
 
 ### CODING 持续交付
 
@@ -83,15 +108,13 @@ CI/CD 工具选型：Jenkins、Zadig、Codeup、CODING...
 
 ![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/eden-images/common/coding-cicd.png)
 
-测试报告可视化
-
 ![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/eden-images/common/coding-test-report.png)
 
 ## 最佳实践
 
 ### 经典分层架构设计
 
-> TODO
+> TODO, Coming soon
 
 ### Git 多人协作分支管理
 
@@ -107,12 +130,16 @@ CI/CD 工具选型：Jenkins、Zadig、Codeup、CODING...
 
 ### Sentinel 流量治理方案
 
-根据业务负载配置您的流控规则，并允许在任意时刻查看监控数据。[传送门](https://github.com/shiyindaxiaojie/Sentinel)
+根据业务负载配置您的流控规则，并允许在任意时刻查看接口的 QPS 和限流情况。[传送门](https://github.com/shiyindaxiaojie/Sentinel)
 
 ![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/eden-images/sentinel/sentinel-dashboard-overview.png)
 
 ### Arthas 在线诊断工具
 
-无需在每个应用部署探针，自动发现服务，开箱即用，允许在低负载环境诊断你的应用。[传送门](https://github.com/shiyindaxiaojie/arthas)
+使用动态时运行探针，自动发现服务，开箱即用，允许在低负载环境诊断你的应用。[传送门](https://github.com/shiyindaxiaojie/arthas)
 
 ![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/eden-images/arthas/arthas-dashboard-overview.png)
+
+## 变更日志
+
+请查阅 [CHANGELOG.md](https://github.com/shiyindaxiaojie/eden-demo-layer/blob/main/CHANGELOG.md)
