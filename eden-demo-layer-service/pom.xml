@@ -65,5 +65,12 @@
 			<groupId>io.github.shiyindaxiaojie</groupId>
 			<artifactId>eden-dubbo-spring-cloud-starter</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>io.github.shiyindaxiaojie.eden.demo</groupId>
+			<artifactId>eden-demo-cola-client</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>
