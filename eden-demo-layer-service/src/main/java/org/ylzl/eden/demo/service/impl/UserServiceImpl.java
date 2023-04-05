@@ -7,12 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.ylzl.eden.cola.dto.PageResponse;
 import org.ylzl.eden.demo.api.UserService;
 import org.ylzl.eden.demo.api.dto.UserPageQuery;
 import org.ylzl.eden.demo.api.dto.UserRequestDTO;
 import org.ylzl.eden.demo.api.dto.UserResponseDTO;
-import org.ylzl.eden.demo.client.user.dto.UserDTO;
 import org.ylzl.eden.demo.dao.UserDAO;
 import org.ylzl.eden.demo.dao.database.dataobject.UserDO;
 import org.ylzl.eden.demo.dao.database.mapper.UserMapper;
@@ -21,7 +19,6 @@ import org.ylzl.eden.spring.framework.dto.PageResult;
 import org.ylzl.eden.spring.framework.dto.Result;
 import org.ylzl.eden.spring.framework.dto.SingleResult;
 import org.ylzl.eden.spring.framework.error.ClientAssert;
-import org.ylzl.eden.spring.framework.error.ThirdServiceAssert;
 
 import java.util.List;
 
@@ -91,9 +88,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	 */
 	@Override
 	public SingleResult<UserResponseDTO> getUserById(Long id) {
-		PageResponse<UserDTO> result = restTemplate.getForObject("http://localhost:8081/api/users", PageResponse.class);
-		ThirdServiceAssert.notNull(result, "USER-FOUND-404");
-
 		log.info("Service 调用");
 		UserDO userDO = userDAO.findById(id);
 		ClientAssert.notNull(userDO, "USER-FOUND-404");
