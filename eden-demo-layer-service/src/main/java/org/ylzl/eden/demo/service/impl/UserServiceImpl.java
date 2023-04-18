@@ -4,9 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.ylzl.eden.demo.api.UserService;
 import org.ylzl.eden.demo.api.dto.UserPageQuery;
 import org.ylzl.eden.demo.api.dto.UserRequestDTO;
@@ -36,9 +34,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	private final UserDAO userDAO;
 
 	private final UserConvertor userConvertor;
-
-	@Autowired
-	private RestTemplate restTemplate;
 
 	/**
 	 * 创建用户
@@ -88,7 +83,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 	 */
 	@Override
 	public SingleResult<UserResponseDTO> getUserById(Long id) {
-		log.info("Service 调用");
 		UserDO userDO = userDAO.findById(id);
 		ClientAssert.notNull(userDO, "USER-FOUND-404");
 		return SingleResult.build(userConvertor.dataObjectToVO(userDO));

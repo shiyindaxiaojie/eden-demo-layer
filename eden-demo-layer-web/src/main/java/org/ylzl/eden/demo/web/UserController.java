@@ -70,7 +70,6 @@ public class UserController {
 	 */
 	@GetMapping("/{id}")
 	public SingleResult<UserResponseDTO> getUserById(@PathVariable Long id) {
-		log.info("HTTP 调用");
 		return userService.getUserById(id);
 	}
 

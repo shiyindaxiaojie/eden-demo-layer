@@ -16,12 +16,12 @@ spring:
         username: nacos
         password: nacos
         extension-configs:
-          - group: eden
-            data-id: log4j2.yml
+          - data-id: log4j2.yml
+            group: eden
             refresh: true
 
 log4j2:
   nacos: # Nacos 支持 log4j2 刷新，需要同时设置 spring.cloud.nacos.config.extension-configs
     enabled: false
-    group: eden
     data-id: log4j2.yml
+    group: eden

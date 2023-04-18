@@ -56,7 +56,7 @@
 						<environment>
 							<TZ>Asia/Shanghai</TZ>
 							<SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
-							<JAVA_OPTS>-Xms256m -Xmx256m</JAVA_OPTS>
+							<JAVA_OPTS>-Xms256m -Xmx256m -Dserver.port=8080</JAVA_OPTS>
 							<ENV_OPTS/>
 							<JAVA_SLEEP>1</JAVA_SLEEP>
 						</environment>
