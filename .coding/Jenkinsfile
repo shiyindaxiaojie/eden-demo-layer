@@ -92,9 +92,9 @@ pipeline {
 			post {
 				always {
 					junit '**/surefire-reports/*.xml'
-					codingHtmlReport(name: 'eden-demo-cola-adapter-jacoco-reports', tag: '代码覆盖率报告', path: 'eden-demo-cola-adapter/target/site/jacoco', entryFile: 'index.html')
-					codingHtmlReport(name: 'eden-demo-cola-app-jacoco-reports', tag: '代码覆盖率报告', path: 'eden-demo-cola-app/target/site/jacoco', entryFile: 'index.html')
-					codingHtmlReport(name: 'eden-demo-cola-infrastructure-jacoco-reports', tag: '代码覆盖率报告', path: 'eden-demo-cola-infrastructure/target/site/jacoco', entryFile: 'index.html')
+					codingHtmlReport(name: 'eden-demo-layer-web-jacoco-reports', tag: '代码覆盖率报告', path: 'eden-demo-layer-web/target/site/jacoco', entryFile: 'index.html')
+					codingHtmlReport(name: 'eden-demo-layer-service-jacoco-reports', tag: '代码覆盖率报告', path: 'eden-demo-layer-service/target/site/jacoco', entryFile: 'index.html')
+					codingHtmlReport(name: 'eden-demo-layer-dao-jacoco-reports', tag: '代码覆盖率报告', path: 'eden-demo-layer-dao/target/site/jacoco', entryFile: 'index.html')
         }
 			}
     }
