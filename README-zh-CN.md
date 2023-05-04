@@ -6,7 +6,7 @@
 
 # 分层架构
 
-![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/images/readme/language-java-blue.svg) [![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/images/readme/license-apache2.0-red.svg)][license-apache2.0] [![](https://github.com/shiyindaxiaojie/eden-demo-layer/workflows/build/badge.svg)][github-action] [![](https://sonarcloud.io/api/project_badges/measure?project=shiyindaxiaojie_eden-demo-layer&metric=alert_status)][sonarcloud-dashboard]
+![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/images/readme/language-java-blue.svg) [![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/images/readme/license-apache2.0-red.svg)][license-apache2.0] [![](https://github.com/shiyindaxiaojie/eden-demo-layer/actions/workflows/maven-ci.yml/badge.svg?branch=main)][github-action] [![](https://sonarcloud.io/api/project_badges/measure?project=shiyindaxiaojie_eden-demo-layer&metric=alert_status)][sonarcloud-dashboard]
 
 本项目使用分层架构构建，分层架构是《阿里巴巴Java开发手册》推荐使用的一种面向数据模型的架构风格，默认上层依赖于下层，例如 `Web` 层依赖 `Service` 层、`Service` 层又依赖 `DAO` 层，在垂直业务领域能够满足单一职责原则，通过 `Maven` 多模块化的开发模式，可以帮助降低复杂应用场景的系统熵值，提升系统开发和运维效率。
 
@@ -68,18 +68,18 @@ spring:
 
 ```yaml
 spring:
-    #  h2: # 内存数据库
-    #    console:
-    #      enabled: true # 线上环境请勿设置
-    #      path: /h2-console
-    #      settings:
-    #        trace: false
-    #        web-allow-others: false
-    datasource: # 数据源管理
-        username:
-        password:
-        url: jdbc:mysql://host:port/schema?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
-        driver-class-name: com.mysql.cj.jdbc.Driver
+#  h2: # 内存数据库
+#    console:
+#      enabled: true # 线上环境请勿设置
+#      path: /h2-console
+#      settings:
+#        trace: false
+#        web-allow-others: false
+  datasource: # 数据源管理
+    username: 
+    password: 
+    url: jdbc:mysql://host:port/schema?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 
 此外，本项目还罗列了 `Redis` 缓存、`RocketMQ` 消息队列、`ShardingSphere` 分库分表等常用组件的使用方案，默认通过 `xxx.enabled` 关闭自动配置。您可以根据实际情况开启配置，直接完成组件的集成。
@@ -104,7 +104,7 @@ spring:
 
 ### CODING 持续交付
 
-下图演示基于 CODING 实现持续构建、持续部署的效果
+下图演示基于 CODING 实现持续构建、持续部署的效果。[传送门](https://www.yuque.com/mengxiangge/action/coding)
 
 ![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/images/common/coding-cicd.png)
 
@@ -132,7 +132,7 @@ spring:
 
 根据业务负载配置您的流控规则，并允许在任意时刻查看接口的 QPS 和限流情况。[传送门](https://github.com/shiyindaxiaojie/Sentinel)
 
-![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/images/sentinel/sentinel-dashboard-overview.png)
+![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/images/sentinel/sentinel-dashboard-overview-custom.png)
 
 ### Arthas 在线诊断工具
 
