@@ -112,6 +112,21 @@ server:
 #      max: 500 # 最大并发数
 #      min-spare: 20 # 初始线程数
 
+management: # 端点管理
+  server:
+    port: 9082
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: ALWAYS
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
 logging:
   access:
     enabled: true
