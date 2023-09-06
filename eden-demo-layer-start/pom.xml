@@ -126,6 +126,16 @@
 			<groupId>io.github.shiyindaxiaojie</groupId>
 			<artifactId>eden-sentinel-spring-cloud-starter</artifactId>
 		</dependency>
+		<!--<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-datasource-zookeeper</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>-->
 
 		<!-- 链路跟踪组件 -->
 		<dependency>
