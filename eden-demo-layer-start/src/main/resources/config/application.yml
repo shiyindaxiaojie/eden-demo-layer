@@ -186,15 +186,18 @@ dubbo: # 分布式调用组件
     base-packages: org.ylzl.eden.demo.adapter # Dubbo 服务扫描
   application:
     id: ${spring.application.name}
+    qos-enable: false
+    qos-port: 21882
   protocol:
     name: dubbo
-    port: 20881 # 开发环境可以使用 -1 生成随机端口
+    port: 20882 # 开发环境可以使用 -1 生成随机端口
   registry:
     id: ${spring.application.name}
     protocol: nacos
     address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=dubbo
     check: false # 是否开启服务注册的启动检查
     register: true # 是否开启服务注册，设置为 false 表示只订阅不注册
+    enable-empty-protection: true # 是否开启推空保护
   metadata-report:
     address: nacos://${spring.cloud.nacos.discovery.server-addr}?namespace=${spring.cloud.nacos.discovery.namespace}&group=dubbo
   config-center:
