@@ -41,7 +41,7 @@
 
 ### 快速体验
 
-本项目默认设置了 local 环境运行，所有外部的组件依赖均为关闭状态。
+本项目默认设置了 dev 环境运行，所有外部的组件依赖均为关闭状态。
 
 1. 在项目目录下运行 `mvn install`（如果不想运行测试，可以加上 `-DskipTests` 参数）。
 2. 进入 `eden-demo-layer-start` 目录，执行 `mvn spring-boot:run` 或者启动 `LayerApplication` 类。运行成功的话，可以看到 `Spring Boot` 启动成功的界面。
@@ -56,43 +56,52 @@
 
 ```yaml
 spring:
-    cloud:
-        nacos:
-            discovery: # 注册中心
-                enabled: true # 默认关闭，请按需开启
-            config: # 配置中心
-                enabled: true # 默认关闭，请按需开启
+  cloud:
+    nacos:
+      discovery: # 注册中心
+        enabled: true # 默认关闭，请按需开启
+      config: # 配置中心
+        enabled: true # 默认关闭，请按需开启
 ```
 
-**修改默认的数据源**：本项目默认使用 `H2` 内存数据库启动，基于 `Liquibase` 在项目启动时自动初始化 SQL 脚本。如果您使用的是外部的 MySQL 数据库，可以从此处调整下数据库的连接信息：[application-local.yml](https://github.com/shiyindaxiaojie/eden-demo-layer/blob/main/eden-demo-layer-start/src/main/resources/config/application-local.yml)，请删除任何与 `H2` 有关的配置。
+**修改默认的数据源**：本项目默认使用 `H2` 内存数据库启动，基于 `Liquibase` 在项目启动时自动初始化 SQL 脚本。如果您使用的是外部的 MySQL 数据库，可以从此处调整下数据库的连接信息：[application-dev.yml](https://github.com/shiyindaxiaojie/eden-demo-layer/blob/main/eden-demo-layer-start/src/main/resources/config/application-dev.yml)，请删除任何与 `H2` 有关的配置。
 
 ```yaml
 spring:
-    #  h2: # 内存数据库
-    #    console:
-    #      enabled: true # 线上环境请勿设置
-    #      path: /h2-console
-    #      settings:
-    #        trace: false
-    #        web-allow-others: false
-    datasource: # 数据源管理
-        username:
-        password:
-        url: jdbc:mysql://host:port/schema?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&serverTimezone=GMT%2B8
-        driver-class-name: com.mysql.cj.jdbc.Driver
+  # h2: # 内存数据库
+  #   console:
+  #     enabled: true # 线上环境请勿设置
+  #     path: /h2-console
+  #     settings:
+  #       trace: false
+  #       web-allow-others: false
+  datasource: # 数据源管理
+    username:
+    password:
+    url: jdbc:mysql://host:port/schema?rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 
 此外，本项目还罗列了 `Redis` 缓存、`RocketMQ` 消息队列、`ShardingSphere` 分库分表等常用组件的使用方案，默认通过 `xxx.enabled` 关闭自动配置。您可以根据实际情况开启配置，直接完成组件的集成。
 
 ## 如何部署
 
-### FatJar 程序部署
+### FatJar 简易部署
 
-执行 `mvn clean package` 打包成一个 fat jar，参考如下命令启动编译后的控制台。
+执行 `mvn -T 4C clean package` 打包成一个可运行的 fat jar，参考如下命令启动编译后的控制台。
 
 ```bash
-java -Dserver.port=8080 -jar target/eden-demo-cola.jar
+java -Dserver.port=8082 -jar target/eden-demo-layer-start.jar
 ```
+
+### Assembly 打包部署
+
+执行 `mvn -P assembly -T 4C clean package` 打包成压缩包，选择下列压缩包复制一份到您期望部署的目录。
+
+* target/eden-demo-layer-start-assembly.zip
+* target/eden-demo-layer-start-assembly.tar.gz
+
+解压文件后，您可以在 `bin` 目录下找到 `startup.sh` 或者 `startup.bat`脚本，直接运行即可。
 
 ### Jib 镜像部署
 
@@ -111,7 +120,7 @@ mvn -pl eden-demo-layer-start jib:build -Djib.disableUpdateChecks=true -DskipTes
 docker build -f docker/Dockerfile -t eden-demo-layer:{tag} .
 ```
 
-### Helm 打包部署
+### Helm 应用部署
 
 以应用为中心，建议使用 Helm 统一管理所需部署的 K8s 资源描述文件，请参考以下命令完成应用的安装和卸载。
 
@@ -136,7 +145,7 @@ helm uninstall eden-demo-layer # 卸载资源
 
 ## 持续集成
 
-> CI/CD 工具选型：Jenkins、Zadig、Codeup、CODING
+> CI/CD 工具选型：Jenkins、Zadig、CODING、Codeup
 
 ### CODING 持续交付
 
@@ -145,6 +154,10 @@ helm uninstall eden-demo-layer # 卸载资源
 ![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/images/common/coding-cicd.png)
 
 ![](https://cdn.jsdelivr.net/gh/shiyindaxiaojie/images/common/coding-test-report.png)
+
+### Codeup 持续集成
+
+> TODO, Coming soon
 
 ## 最佳实践
 
