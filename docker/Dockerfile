@@ -1,5 +1,5 @@
 # 使用基础镜像
-FROM openjdk:11-jdk-slim as builder
+FROM openjdk:11-jdk-slim AS builder
 
 # 设置工作目录并指定构建模块
 WORKDIR /app
