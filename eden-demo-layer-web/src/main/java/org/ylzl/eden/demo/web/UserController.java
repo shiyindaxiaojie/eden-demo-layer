@@ -4,15 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.ylzl.eden.demo.api.UserService;
-import org.ylzl.eden.demo.api.dto.UserPageQuery;
-import org.ylzl.eden.demo.api.dto.UserRequestDTO;
-import org.ylzl.eden.demo.api.dto.UserResponseDTO;
+import org.ylzl.eden.demo.api.dto.*;
 import org.ylzl.eden.demo.web.constant.API;
+import org.ylzl.eden.spring.framework.dto.MultiResult;
 import org.ylzl.eden.spring.framework.dto.PageResult;
 import org.ylzl.eden.spring.framework.dto.Result;
 import org.ylzl.eden.spring.framework.dto.SingleResult;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 用户控制器
@@ -82,5 +82,47 @@ public class UserController {
 	@GetMapping
 	public PageResult<UserResponseDTO> listUserByPage(@Valid @ModelAttribute UserPageQuery query) {
 		return userService.listUserByPage(query);
+	}
+
+	// ========== RBAC 扩展接口 ==========
+
+	@PutMapping("/{id}/activate")
+	public Result activateUser(@PathVariable Long id) {
+		return userService.activateUser(id);
+	}
+
+	@PutMapping("/{id}/lock")
+	public Result lockUser(@PathVariable Long id) {
+		return userService.lockUser(id);
+	}
+
+	@PutMapping("/{id}/unlock")
+	public Result unlockUser(@PathVariable Long id) {
+		return userService.unlockUser(id);
+	}
+
+	@PutMapping("/{id}/disable")
+	public Result disableUser(@PathVariable Long id) {
+		return userService.disableUser(id);
+	}
+
+	@PutMapping("/{id}/roles")
+	public Result assignRoles(@PathVariable Long id, @RequestBody List<Long> roleIds) {
+		return userService.assignRoles(id, roleIds);
+	}
+
+	@GetMapping("/{id}/roles")
+	public MultiResult<RoleResponseDTO> getUserRoles(@PathVariable Long id) {
+		return userService.getUserRoles(id);
+	}
+
+	@GetMapping("/{id}/permissions")
+	public MultiResult<PermissionResponseDTO> getUserPermissions(@PathVariable Long id) {
+		return userService.getUserPermissions(id);
+	}
+
+	@GetMapping("/{id}/menus")
+	public MultiResult<MenuTreeDTO> getUserMenus(@PathVariable Long id) {
+		return userService.getUserMenus(id);
 	}
 }

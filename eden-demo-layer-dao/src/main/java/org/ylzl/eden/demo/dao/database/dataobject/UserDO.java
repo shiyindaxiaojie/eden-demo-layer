@@ -123,4 +123,10 @@ public class UserDO implements Serializable {
 	 */
 	@TableField("last_modified_date")
 	private LocalDateTime lastModifiedDate;
+
+	/**
+	 * 用户状态（0-禁用, 1-激活, 2-锁定）
+	 */
+	@TableField("status")
+	private Integer status;
 }

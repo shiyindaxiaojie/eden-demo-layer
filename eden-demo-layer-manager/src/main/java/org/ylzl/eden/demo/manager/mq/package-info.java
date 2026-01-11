@@ -14,4 +14,17 @@
  * limitations under the License.
  */
 
+/**
+ * 消息队列处理层
+ * <p>《阿里巴巴Java开发手册》Manager 层职责：</p>
+ * <ul>
+ *     <li>消息队列的封装（RocketMQ、Kafka 等）</li>
+ *     <li>消息生产者与消费者的统一管理</li>
+ *     <li>消息格式转换与异常处理</li>
+ *     <li>消息幂等性保障与重试机制</li>
+ * </ul>
+ *
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
+ * @since 2.4.14
+ */
 package org.ylzl.eden.demo.manager.mq;

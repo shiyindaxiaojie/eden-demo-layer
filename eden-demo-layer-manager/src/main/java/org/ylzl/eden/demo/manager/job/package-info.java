@@ -14,4 +14,17 @@
  * limitations under the License.
  */
 
+/**
+ * 定时任务处理层
+ * <p>《阿里巴巴Java开发手册》Manager 层职责：</p>
+ * <ul>
+ *     <li>定时任务的封装与调度（XXL-JOB、Quartz 等）</li>
+ *     <li>离线数据处理、批量任务执行</li>
+ *     <li>异步任务的统一管理</li>
+ *     <li>任务执行结果的预处理与异常转化</li>
+ * </ul>
+ *
+ * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
+ * @since 2.4.14
+ */
 package org.ylzl.eden.demo.manager.job;
